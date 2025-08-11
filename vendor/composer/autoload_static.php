@@ -21,15 +21,15 @@ class ComposerStaticInitca85fc34cb7e62c2e73e95db0d2ed786
         '09f6b20656683369174dd6fa83b7e5fb' => __DIR__ . '/..' . '/symfony/polyfill-uuid/bootstrap.php',
         'a1105708a18b76903365ca1c4aa61b02' => __DIR__ . '/..' . '/symfony/translation/Resources/functions.php',
         '47e1160838b5e5a10346ac4084b58c23' => __DIR__ . '/..' . '/laravel/prompts/src/helpers.php',
-        'da91a01b5badbe5394c83814ef5982ea' => __DIR__ . '/..' . '/php-flasher/flasher/helpers.php',
-        '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
         'e39a8b23c42d4e1452234d762b03835a' => __DIR__ . '/..' . '/ramsey/uuid/src/functions.php',
-        '3bd81c9b8fcc150b69d8b63b4d2ccf23' => __DIR__ . '/..' . '/spatie/flare-client-php/src/helpers.php',
         '265b4faa2b3a9766332744949e83bf97' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Collections/helpers.php',
         'c7a3c339e7e14b60e06a2d7fcce9476b' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Events/functions.php',
         'f57d353b41eb2e234b26064d63d8c5dd' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Filesystem/functions.php',
         'f0906e6318348a765ffb6eb24e0d0938' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/helpers.php',
         '58571171fd5812e6e447dce228f52f4d' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/helpers.php',
+        'da91a01b5badbe5394c83814ef5982ea' => __DIR__ . '/..' . '/php-flasher/flasher/helpers.php',
+        '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
+        '3bd81c9b8fcc150b69d8b63b4d2ccf23' => __DIR__ . '/..' . '/spatie/flare-client-php/src/helpers.php',
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
         '801c31d8ed748cfa537fa45402288c95' => __DIR__ . '/..' . '/psy/psysh/src/functions.php',
         '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
@@ -38,10 +38,13 @@ class ComposerStaticInitca85fc34cb7e62c2e73e95db0d2ed786
         'ce9671a430e4846b44e1c68c7611f9f5' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery.php',
         'a1cfe24d14977df6878b9bf804af2d1c' => __DIR__ . '/..' . '/nunomaduro/collision/src/Adapters/Phpunit/Autoload.php',
         'ec07570ca5a812141189b1fa81503674' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Assert/Functions.php',
+        '6b34c85f7b1ad6faa15aa12109e030f2' => __DIR__ . '/..' . '/realrashid/sweet-alert/src/functions.php',
         '320163ac6b93aebe3dc25b60a0533d56' => __DIR__ . '/..' . '/spatie/laravel-ignition/src/helpers.php',
+        '377b22b161c09ed6e5152de788ca020a' => __DIR__ . '/..' . '/spatie/laravel-permission/src/helpers.php',
         '0b47d6d4a00ca9112ba3953b49e7c9a4' => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src/helper.php',
         '101b35f72e0ccb1b5ef72aa86bba3ef9' => __DIR__ . '/..' . '/yoeunes/toastr/src/helpers.php',
         '4c174d5498029ea31835bb2b918c7b49' => __DIR__ . '/../..' . '/app/Helpers/BaseHelper.php',
+        '0574d7a3e613982ca09dd2889bc06dec' => __DIR__ . '/../..' . '/app/Http/Hepler/helper.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -58,6 +61,7 @@ class ComposerStaticInitca85fc34cb7e62c2e73e95db0d2ed786
         array (
             'Whoops\\' => 7,
             'Webmozart\\Assert\\' => 17,
+            'WebPConvert\\' => 12,
         ),
         'T' => 
         array (
@@ -94,6 +98,7 @@ class ComposerStaticInitca85fc34cb7e62c2e73e95db0d2ed786
             'Symfony\\Component\\ErrorHandler\\' => 31,
             'Symfony\\Component\\CssSelector\\' => 30,
             'Symfony\\Component\\Console\\' => 26,
+            'Spatie\\Permission\\' => 18,
             'Spatie\\LaravelIgnition\\' => 23,
             'Spatie\\Ignition\\' => 16,
             'Spatie\\FlareClient\\' => 19,
@@ -102,6 +107,7 @@ class ComposerStaticInitca85fc34cb7e62c2e73e95db0d2ed786
         ),
         'R' => 
         array (
+            'RealRashid\\SweetAlert\\' => 22,
             'Ramsey\\Uuid\\' => 12,
             'Ramsey\\Collection\\' => 18,
         ),
@@ -129,6 +135,7 @@ class ComposerStaticInitca85fc34cb7e62c2e73e95db0d2ed786
         ),
         'L' => 
         array (
+            'LocateBinaries\\' => 15,
             'League\\MimeTypeDetection\\' => 25,
             'League\\Flysystem\\Local\\' => 23,
             'League\\Flysystem\\' => 17,
@@ -142,6 +149,8 @@ class ComposerStaticInitca85fc34cb7e62c2e73e95db0d2ed786
         ),
         'I' => 
         array (
+            'ImageMimeTypeSniffer\\' => 21,
+            'ImageMimeTypeGuesser\\' => 21,
             'Illuminate\\Support\\' => 19,
             'Illuminate\\' => 11,
         ),
@@ -158,10 +167,12 @@ class ComposerStaticInitca85fc34cb7e62c2e73e95db0d2ed786
             'Fruitcake\\Cors\\' => 15,
             'Flasher\\Prime\\' => 14,
             'Flasher\\Laravel\\' => 16,
+            'FileUtil\\' => 9,
             'Faker\\' => 6,
         ),
         'E' => 
         array (
+            'ExecWithFallback\\' => 17,
             'Egulias\\EmailValidator\\' => 23,
         ),
         'D' => 
@@ -210,6 +221,10 @@ class ComposerStaticInitca85fc34cb7e62c2e73e95db0d2ed786
         'Webmozart\\Assert\\' => 
         array (
             0 => __DIR__ . '/..' . '/webmozart/assert/src',
+        ),
+        'WebPConvert\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/rosell-dk/webp-convert/src',
         ),
         'TijsVerkoyen\\CssToInlineStyles\\' => 
         array (
@@ -331,6 +346,10 @@ class ComposerStaticInitca85fc34cb7e62c2e73e95db0d2ed786
         array (
             0 => __DIR__ . '/..' . '/symfony/console',
         ),
+        'Spatie\\Permission\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/spatie/laravel-permission/src',
+        ),
         'Spatie\\LaravelIgnition\\' => 
         array (
             0 => __DIR__ . '/..' . '/spatie/laravel-ignition/src',
@@ -352,6 +371,10 @@ class ComposerStaticInitca85fc34cb7e62c2e73e95db0d2ed786
         'Spatie\\Backtrace\\' => 
         array (
             0 => __DIR__ . '/..' . '/spatie/backtrace/src',
+        ),
+        'RealRashid\\SweetAlert\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/realrashid/sweet-alert/src',
         ),
         'Ramsey\\Uuid\\' => 
         array (
@@ -414,6 +437,10 @@ class ComposerStaticInitca85fc34cb7e62c2e73e95db0d2ed786
         array (
             0 => __DIR__ . '/..' . '/mockery/mockery/library/Mockery',
         ),
+        'LocateBinaries\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/rosell-dk/locate-binaries/src',
+        ),
         'League\\MimeTypeDetection\\' => 
         array (
             0 => __DIR__ . '/..' . '/league/mime-type-detection/src',
@@ -453,6 +480,14 @@ class ComposerStaticInitca85fc34cb7e62c2e73e95db0d2ed786
         'Laravel\\Prompts\\' => 
         array (
             0 => __DIR__ . '/..' . '/laravel/prompts/src',
+        ),
+        'ImageMimeTypeSniffer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/rosell-dk/image-mime-type-sniffer/src',
+        ),
+        'ImageMimeTypeGuesser\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/rosell-dk/image-mime-type-guesser/src',
         ),
         'Illuminate\\Support\\' => 
         array (
@@ -496,9 +531,17 @@ class ComposerStaticInitca85fc34cb7e62c2e73e95db0d2ed786
         array (
             0 => __DIR__ . '/..' . '/php-flasher/flasher-laravel',
         ),
+        'FileUtil\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/rosell-dk/file-util/src',
+        ),
         'Faker\\' => 
         array (
             0 => __DIR__ . '/..' . '/fakerphp/faker/src/Faker',
+        ),
+        'ExecWithFallback\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/rosell-dk/exec-with-fallback/src',
         ),
         'Egulias\\EmailValidator\\' => 
         array (
@@ -568,6 +611,7 @@ class ComposerStaticInitca85fc34cb7e62c2e73e95db0d2ed786
     );
 
     public static $classMap = array (
+        'App\\Console\\Commands\\CreateModule' => __DIR__ . '/../..' . '/app/Console/Commands/CreateModule.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\AdminController' => __DIR__ . '/../..' . '/app/Http/Controllers/AdminController.php',
@@ -627,6 +671,7 @@ class ComposerStaticInitca85fc34cb7e62c2e73e95db0d2ed786
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\ValidateSignature' => __DIR__ . '/../..' . '/app/Http/Middleware/ValidateSignature.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
+        'App\\Http\\Requests\\UserRequest' => __DIR__ . '/../..' . '/app/Http/Requests/UserRequest.php',
         'App\\Models\\Admin' => __DIR__ . '/../..' . '/app/Models/Admin.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
@@ -636,7 +681,9 @@ class ComposerStaticInitca85fc34cb7e62c2e73e95db0d2ed786
         'App\\Providers\\MenuServiceProvider' => __DIR__ . '/../..' . '/app/Providers/MenuServiceProvider.php',
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
         'App\\Services\\AuthService' => __DIR__ . '/../..' . '/app/Services/AuthService.php',
+        'App\\Services\\BaseService' => __DIR__ . '/../..' . '/app/Services/BaseService.php',
         'App\\Services\\UserService' => __DIR__ . '/../..' . '/app/Services/UserService.php',
+        'App\\Traits\\PhotoTrait' => __DIR__ . '/../..' . '/app/Traits/PhotoTrait.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
         'Brick\\Math\\BigDecimal' => __DIR__ . '/..' . '/brick/math/src/BigDecimal.php',
         'Brick\\Math\\BigInteger' => __DIR__ . '/..' . '/brick/math/src/BigInteger.php',
@@ -961,6 +1008,13 @@ class ComposerStaticInitca85fc34cb7e62c2e73e95db0d2ed786
         'Egulias\\EmailValidator\\Warning\\QuotedString' => __DIR__ . '/..' . '/egulias/email-validator/src/Warning/QuotedString.php',
         'Egulias\\EmailValidator\\Warning\\TLD' => __DIR__ . '/..' . '/egulias/email-validator/src/Warning/TLD.php',
         'Egulias\\EmailValidator\\Warning\\Warning' => __DIR__ . '/..' . '/egulias/email-validator/src/Warning/Warning.php',
+        'ExecWithFallback\\Availability' => __DIR__ . '/..' . '/rosell-dk/exec-with-fallback/src/Availability.php',
+        'ExecWithFallback\\ExecWithFallback' => __DIR__ . '/..' . '/rosell-dk/exec-with-fallback/src/ExecWithFallback.php',
+        'ExecWithFallback\\ExecWithFallbackNoMercy' => __DIR__ . '/..' . '/rosell-dk/exec-with-fallback/src/ExecWithFallbackNoMercy.php',
+        'ExecWithFallback\\POpen' => __DIR__ . '/..' . '/rosell-dk/exec-with-fallback/src/POpen.php',
+        'ExecWithFallback\\Passthru' => __DIR__ . '/..' . '/rosell-dk/exec-with-fallback/src/Passthru.php',
+        'ExecWithFallback\\ProcOpen' => __DIR__ . '/..' . '/rosell-dk/exec-with-fallback/src/ProcOpen.php',
+        'ExecWithFallback\\ShellExec' => __DIR__ . '/..' . '/rosell-dk/exec-with-fallback/src/ShellExec.php',
         'Faker\\Calculator\\Ean' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/Calculator/Ean.php',
         'Faker\\Calculator\\Iban' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/Calculator/Iban.php',
         'Faker\\Calculator\\Inn' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/Calculator/Inn.php',
@@ -1467,6 +1521,9 @@ class ComposerStaticInitca85fc34cb7e62c2e73e95db0d2ed786
         'Faker\\Provider\\zh_TW\\Text' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/Provider/zh_TW/Text.php',
         'Faker\\UniqueGenerator' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/UniqueGenerator.php',
         'Faker\\ValidGenerator' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/ValidGenerator.php',
+        'FileUtil\\FileExists' => __DIR__ . '/..' . '/rosell-dk/file-util/src/FileExists.php',
+        'FileUtil\\FileExistsUsingExec' => __DIR__ . '/..' . '/rosell-dk/file-util/src/FileExistsUsingExec.php',
+        'FileUtil\\PathValidator' => __DIR__ . '/..' . '/rosell-dk/file-util/src/PathValidator.php',
         'Flasher\\Laravel\\Bridge\\Command\\FlasherCommand' => __DIR__ . '/..' . '/php-flasher/flasher-laravel/Bridge/Command/FlasherCommand.php',
         'Flasher\\Laravel\\Bridge\\Legacy\\Command\\FlasherCommand' => __DIR__ . '/..' . '/php-flasher/flasher-laravel/Bridge/Legacy/Command/FlasherCommand.php',
         'Flasher\\Laravel\\Bridge\\Typed\\Command\\FlasherCommand' => __DIR__ . '/..' . '/php-flasher/flasher-laravel/Bridge/Typed/Command/FlasherCommand.php',
@@ -2969,6 +3026,17 @@ class ComposerStaticInitca85fc34cb7e62c2e73e95db0d2ed786
         'Illuminate\\View\\ViewFinderInterface' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/View/ViewFinderInterface.php',
         'Illuminate\\View\\ViewName' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/View/ViewName.php',
         'Illuminate\\View\\ViewServiceProvider' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/View/ViewServiceProvider.php',
+        'ImageMimeTypeGuesser\\Detectors\\AbstractDetector' => __DIR__ . '/..' . '/rosell-dk/image-mime-type-guesser/src/Detectors/AbstractDetector.php',
+        'ImageMimeTypeGuesser\\Detectors\\ExifImageType' => __DIR__ . '/..' . '/rosell-dk/image-mime-type-guesser/src/Detectors/ExifImageType.php',
+        'ImageMimeTypeGuesser\\Detectors\\FInfo' => __DIR__ . '/..' . '/rosell-dk/image-mime-type-guesser/src/Detectors/FInfo.php',
+        'ImageMimeTypeGuesser\\Detectors\\GetImageSize' => __DIR__ . '/..' . '/rosell-dk/image-mime-type-guesser/src/Detectors/GetImageSize.php',
+        'ImageMimeTypeGuesser\\Detectors\\MimeContentType' => __DIR__ . '/..' . '/rosell-dk/image-mime-type-guesser/src/Detectors/MimeContentType.php',
+        'ImageMimeTypeGuesser\\Detectors\\SignatureSniffer' => __DIR__ . '/..' . '/rosell-dk/image-mime-type-guesser/src/Detectors/SignatureSniffer.php',
+        'ImageMimeTypeGuesser\\Detectors\\Stack' => __DIR__ . '/..' . '/rosell-dk/image-mime-type-guesser/src/Detectors/Stack.php',
+        'ImageMimeTypeGuesser\\GuessFromExtension' => __DIR__ . '/..' . '/rosell-dk/image-mime-type-guesser/src/GuessFromExtension.php',
+        'ImageMimeTypeGuesser\\ImageMimeTypeGuesser' => __DIR__ . '/..' . '/rosell-dk/image-mime-type-guesser/src/ImageMimeTypeGuesser.php',
+        'ImageMimeTypeGuesser\\MimeMap' => __DIR__ . '/..' . '/rosell-dk/image-mime-type-guesser/src/MimeMap.php',
+        'ImageMimeTypeSniffer\\ImageMimeTypeSniffer' => __DIR__ . '/..' . '/rosell-dk/image-mime-type-sniffer/src/ImageMimeTypeSniffer.php',
         'Laravel\\Prompts\\Concerns\\Colors' => __DIR__ . '/..' . '/laravel/prompts/src/Concerns/Colors.php',
         'Laravel\\Prompts\\Concerns\\Cursor' => __DIR__ . '/..' . '/laravel/prompts/src/Concerns/Cursor.php',
         'Laravel\\Prompts\\Concerns\\Erase' => __DIR__ . '/..' . '/laravel/prompts/src/Concerns/Erase.php',
@@ -3436,6 +3504,7 @@ class ComposerStaticInitca85fc34cb7e62c2e73e95db0d2ed786
         'League\\MimeTypeDetection\\GeneratedExtensionToMimeTypeMap' => __DIR__ . '/..' . '/league/mime-type-detection/src/GeneratedExtensionToMimeTypeMap.php',
         'League\\MimeTypeDetection\\MimeTypeDetector' => __DIR__ . '/..' . '/league/mime-type-detection/src/MimeTypeDetector.php',
         'League\\MimeTypeDetection\\OverridingExtensionToMimeTypeMap' => __DIR__ . '/..' . '/league/mime-type-detection/src/OverridingExtensionToMimeTypeMap.php',
+        'LocateBinaries\\LocateBinaries' => __DIR__ . '/..' . '/rosell-dk/locate-binaries/src/LocateBinaries.php',
         'Mcamara\\LaravelLocalization\\Commands\\RouteTranslationsCacheCommand' => __DIR__ . '/..' . '/mcamara/laravel-localization/src/Mcamara/LaravelLocalization/Commands/RouteTranslationsCacheCommand.php',
         'Mcamara\\LaravelLocalization\\Commands\\RouteTranslationsClearCommand' => __DIR__ . '/..' . '/mcamara/laravel-localization/src/Mcamara/LaravelLocalization/Commands/RouteTranslationsClearCommand.php',
         'Mcamara\\LaravelLocalization\\Commands\\RouteTranslationsListCommand' => __DIR__ . '/..' . '/mcamara/laravel-localization/src/Mcamara/LaravelLocalization/Commands/RouteTranslationsListCommand.php',
@@ -5378,6 +5447,13 @@ class ComposerStaticInitca85fc34cb7e62c2e73e95db0d2ed786
         'Ramsey\\Uuid\\UuidInterface' => __DIR__ . '/..' . '/ramsey/uuid/src/UuidInterface.php',
         'Ramsey\\Uuid\\Validator\\GenericValidator' => __DIR__ . '/..' . '/ramsey/uuid/src/Validator/GenericValidator.php',
         'Ramsey\\Uuid\\Validator\\ValidatorInterface' => __DIR__ . '/..' . '/ramsey/uuid/src/Validator/ValidatorInterface.php',
+        'RealRashid\\SweetAlert\\Console\\PublishCommand' => __DIR__ . '/..' . '/realrashid/sweet-alert/src/Console/PublishCommand.php',
+        'RealRashid\\SweetAlert\\Facades\\Alert' => __DIR__ . '/..' . '/realrashid/sweet-alert/src/Facades/Alert.php',
+        'RealRashid\\SweetAlert\\Storage\\AlertSessionStore' => __DIR__ . '/..' . '/realrashid/sweet-alert/src/Storage/AlertSessionStore.php',
+        'RealRashid\\SweetAlert\\Storage\\SessionStore' => __DIR__ . '/..' . '/realrashid/sweet-alert/src/Storage/SessionStore.php',
+        'RealRashid\\SweetAlert\\SweetAlertServiceProvider' => __DIR__ . '/..' . '/realrashid/sweet-alert/src/SweetAlertServiceProvider.php',
+        'RealRashid\\SweetAlert\\ToSweetAlert' => __DIR__ . '/..' . '/realrashid/sweet-alert/src/ToSweetAlert.php',
+        'RealRashid\\SweetAlert\\Toaster' => __DIR__ . '/..' . '/realrashid/sweet-alert/src/Toaster.php',
         'SQLite3Exception' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/SQLite3Exception.php',
         'SebastianBergmann\\CliParser\\AmbiguousOptionException' => __DIR__ . '/..' . '/sebastian/cli-parser/src/exceptions/AmbiguousOptionException.php',
         'SebastianBergmann\\CliParser\\Exception' => __DIR__ . '/..' . '/sebastian/cli-parser/src/exceptions/Exception.php',
@@ -5825,6 +5901,41 @@ class ComposerStaticInitca85fc34cb7e62c2e73e95db0d2ed786
         'Spatie\\LaravelIgnition\\Support\\StringComparator' => __DIR__ . '/..' . '/spatie/error-solutions/legacy/laravel-ignition/Support/StringComparator.php',
         'Spatie\\LaravelIgnition\\Views\\BladeSourceMapCompiler' => __DIR__ . '/..' . '/spatie/laravel-ignition/src/Views/BladeSourceMapCompiler.php',
         'Spatie\\LaravelIgnition\\Views\\ViewExceptionMapper' => __DIR__ . '/..' . '/spatie/laravel-ignition/src/Views/ViewExceptionMapper.php',
+        'Spatie\\Permission\\Commands\\CacheReset' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Commands/CacheReset.php',
+        'Spatie\\Permission\\Commands\\CreatePermission' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Commands/CreatePermission.php',
+        'Spatie\\Permission\\Commands\\CreateRole' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Commands/CreateRole.php',
+        'Spatie\\Permission\\Commands\\Show' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Commands/Show.php',
+        'Spatie\\Permission\\Commands\\UpgradeForTeams' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Commands/UpgradeForTeams.php',
+        'Spatie\\Permission\\Contracts\\Permission' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Contracts/Permission.php',
+        'Spatie\\Permission\\Contracts\\PermissionsTeamResolver' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Contracts/PermissionsTeamResolver.php',
+        'Spatie\\Permission\\Contracts\\Role' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Contracts/Role.php',
+        'Spatie\\Permission\\Contracts\\Wildcard' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Contracts/Wildcard.php',
+        'Spatie\\Permission\\DefaultTeamResolver' => __DIR__ . '/..' . '/spatie/laravel-permission/src/DefaultTeamResolver.php',
+        'Spatie\\Permission\\Events\\PermissionAttached' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Events/PermissionAttached.php',
+        'Spatie\\Permission\\Events\\PermissionDetached' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Events/PermissionDetached.php',
+        'Spatie\\Permission\\Events\\RoleAttached' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Events/RoleAttached.php',
+        'Spatie\\Permission\\Events\\RoleDetached' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Events/RoleDetached.php',
+        'Spatie\\Permission\\Exceptions\\GuardDoesNotMatch' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Exceptions/GuardDoesNotMatch.php',
+        'Spatie\\Permission\\Exceptions\\PermissionAlreadyExists' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Exceptions/PermissionAlreadyExists.php',
+        'Spatie\\Permission\\Exceptions\\PermissionDoesNotExist' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Exceptions/PermissionDoesNotExist.php',
+        'Spatie\\Permission\\Exceptions\\RoleAlreadyExists' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Exceptions/RoleAlreadyExists.php',
+        'Spatie\\Permission\\Exceptions\\RoleDoesNotExist' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Exceptions/RoleDoesNotExist.php',
+        'Spatie\\Permission\\Exceptions\\UnauthorizedException' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Exceptions/UnauthorizedException.php',
+        'Spatie\\Permission\\Exceptions\\WildcardPermissionInvalidArgument' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Exceptions/WildcardPermissionInvalidArgument.php',
+        'Spatie\\Permission\\Exceptions\\WildcardPermissionNotImplementsContract' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Exceptions/WildcardPermissionNotImplementsContract.php',
+        'Spatie\\Permission\\Exceptions\\WildcardPermissionNotProperlyFormatted' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Exceptions/WildcardPermissionNotProperlyFormatted.php',
+        'Spatie\\Permission\\Guard' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Guard.php',
+        'Spatie\\Permission\\Middleware\\PermissionMiddleware' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Middleware/PermissionMiddleware.php',
+        'Spatie\\Permission\\Middleware\\RoleMiddleware' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Middleware/RoleMiddleware.php',
+        'Spatie\\Permission\\Middleware\\RoleOrPermissionMiddleware' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Middleware/RoleOrPermissionMiddleware.php',
+        'Spatie\\Permission\\Models\\Permission' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Models/Permission.php',
+        'Spatie\\Permission\\Models\\Role' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Models/Role.php',
+        'Spatie\\Permission\\PermissionRegistrar' => __DIR__ . '/..' . '/spatie/laravel-permission/src/PermissionRegistrar.php',
+        'Spatie\\Permission\\PermissionServiceProvider' => __DIR__ . '/..' . '/spatie/laravel-permission/src/PermissionServiceProvider.php',
+        'Spatie\\Permission\\Traits\\HasPermissions' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Traits/HasPermissions.php',
+        'Spatie\\Permission\\Traits\\HasRoles' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Traits/HasRoles.php',
+        'Spatie\\Permission\\Traits\\RefreshesPermissionCache' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Traits/RefreshesPermissionCache.php',
+        'Spatie\\Permission\\WildcardPermission' => __DIR__ . '/..' . '/spatie/laravel-permission/src/WildcardPermission.php',
         'Stringable' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Stringable.php',
         'Symfony\\Component\\Console\\Application' => __DIR__ . '/..' . '/symfony/console/Application.php',
         'Symfony\\Component\\Console\\Attribute\\AsCommand' => __DIR__ . '/..' . '/symfony/console/Attribute/AsCommand.php',
@@ -6841,6 +6952,78 @@ class ComposerStaticInitca85fc34cb7e62c2e73e95db0d2ed786
         'TijsVerkoyen\\CssToInlineStyles\\Css\\Rule\\Rule' => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src/Css/Rule/Rule.php',
         'UnhandledMatchError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
         'ValueError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/ValueError.php',
+        'WebPConvert\\Convert\\ConverterFactory' => __DIR__ . '/..' . '/rosell-dk/webp-convert/src/Convert/ConverterFactory.php',
+        'WebPConvert\\Convert\\Converters\\AbstractConverter' => __DIR__ . '/..' . '/rosell-dk/webp-convert/src/Convert/Converters/AbstractConverter.php',
+        'WebPConvert\\Convert\\Converters\\BaseTraits\\AutoQualityTrait' => __DIR__ . '/..' . '/rosell-dk/webp-convert/src/Convert/Converters/BaseTraits/AutoQualityTrait.php',
+        'WebPConvert\\Convert\\Converters\\BaseTraits\\DestinationPreparationTrait' => __DIR__ . '/..' . '/rosell-dk/webp-convert/src/Convert/Converters/BaseTraits/DestinationPreparationTrait.php',
+        'WebPConvert\\Convert\\Converters\\BaseTraits\\LoggerTrait' => __DIR__ . '/..' . '/rosell-dk/webp-convert/src/Convert/Converters/BaseTraits/LoggerTrait.php',
+        'WebPConvert\\Convert\\Converters\\BaseTraits\\OptionsTrait' => __DIR__ . '/..' . '/rosell-dk/webp-convert/src/Convert/Converters/BaseTraits/OptionsTrait.php',
+        'WebPConvert\\Convert\\Converters\\BaseTraits\\WarningLoggerTrait' => __DIR__ . '/..' . '/rosell-dk/webp-convert/src/Convert/Converters/BaseTraits/WarningLoggerTrait.php',
+        'WebPConvert\\Convert\\Converters\\ConverterTraits\\CloudConverterTrait' => __DIR__ . '/..' . '/rosell-dk/webp-convert/src/Convert/Converters/ConverterTraits/CloudConverterTrait.php',
+        'WebPConvert\\Convert\\Converters\\ConverterTraits\\CurlTrait' => __DIR__ . '/..' . '/rosell-dk/webp-convert/src/Convert/Converters/ConverterTraits/CurlTrait.php',
+        'WebPConvert\\Convert\\Converters\\ConverterTraits\\EncodingAutoTrait' => __DIR__ . '/..' . '/rosell-dk/webp-convert/src/Convert/Converters/ConverterTraits/EncodingAutoTrait.php',
+        'WebPConvert\\Convert\\Converters\\ConverterTraits\\ExecTrait' => __DIR__ . '/..' . '/rosell-dk/webp-convert/src/Convert/Converters/ConverterTraits/ExecTrait.php',
+        'WebPConvert\\Convert\\Converters\\Cwebp' => __DIR__ . '/..' . '/rosell-dk/webp-convert/src/Convert/Converters/Cwebp.php',
+        'WebPConvert\\Convert\\Converters\\Ewww' => __DIR__ . '/..' . '/rosell-dk/webp-convert/src/Convert/Converters/Ewww.php',
+        'WebPConvert\\Convert\\Converters\\FFMpeg' => __DIR__ . '/..' . '/rosell-dk/webp-convert/src/Convert/Converters/FFMpeg.php',
+        'WebPConvert\\Convert\\Converters\\Gd' => __DIR__ . '/..' . '/rosell-dk/webp-convert/src/Convert/Converters/Gd.php',
+        'WebPConvert\\Convert\\Converters\\Gmagick' => __DIR__ . '/..' . '/rosell-dk/webp-convert/src/Convert/Converters/Gmagick.php',
+        'WebPConvert\\Convert\\Converters\\GmagickBinary' => __DIR__ . '/..' . '/rosell-dk/webp-convert/src/Convert/Converters/GmagickBinary.php',
+        'WebPConvert\\Convert\\Converters\\GraphicsMagick' => __DIR__ . '/..' . '/rosell-dk/webp-convert/src/Convert/Converters/GraphicsMagick.php',
+        'WebPConvert\\Convert\\Converters\\ImageMagick' => __DIR__ . '/..' . '/rosell-dk/webp-convert/src/Convert/Converters/ImageMagick.php',
+        'WebPConvert\\Convert\\Converters\\Imagick' => __DIR__ . '/..' . '/rosell-dk/webp-convert/src/Convert/Converters/Imagick.php',
+        'WebPConvert\\Convert\\Converters\\ImagickBinary' => __DIR__ . '/..' . '/rosell-dk/webp-convert/src/Convert/Converters/ImagickBinary.php',
+        'WebPConvert\\Convert\\Converters\\Stack' => __DIR__ . '/..' . '/rosell-dk/webp-convert/src/Convert/Converters/Stack.php',
+        'WebPConvert\\Convert\\Converters\\Vips' => __DIR__ . '/..' . '/rosell-dk/webp-convert/src/Convert/Converters/Vips.php',
+        'WebPConvert\\Convert\\Converters\\Wpc' => __DIR__ . '/..' . '/rosell-dk/webp-convert/src/Convert/Converters/Wpc.php',
+        'WebPConvert\\Convert\\Exceptions\\ConversionFailedException' => __DIR__ . '/..' . '/rosell-dk/webp-convert/src/Convert/Exceptions/ConversionFailedException.php',
+        'WebPConvert\\Convert\\Exceptions\\ConversionFailed\\ConversionSkippedException' => __DIR__ . '/..' . '/rosell-dk/webp-convert/src/Convert/Exceptions/ConversionFailed/ConversionSkippedException.php',
+        'WebPConvert\\Convert\\Exceptions\\ConversionFailed\\ConverterNotOperationalException' => __DIR__ . '/..' . '/rosell-dk/webp-convert/src/Convert/Exceptions/ConversionFailed/ConverterNotOperationalException.php',
+        'WebPConvert\\Convert\\Exceptions\\ConversionFailed\\ConverterNotOperational\\InvalidApiKeyException' => __DIR__ . '/..' . '/rosell-dk/webp-convert/src/Convert/Exceptions/ConversionFailed/ConverterNotOperational/InvalidApiKeyException.php',
+        'WebPConvert\\Convert\\Exceptions\\ConversionFailed\\ConverterNotOperational\\SystemRequirementsNotMetException' => __DIR__ . '/..' . '/rosell-dk/webp-convert/src/Convert/Exceptions/ConversionFailed/ConverterNotOperational/SystemRequirementsNotMetException.php',
+        'WebPConvert\\Convert\\Exceptions\\ConversionFailed\\FileSystemProblemsException' => __DIR__ . '/..' . '/rosell-dk/webp-convert/src/Convert/Exceptions/ConversionFailed/FileSystemProblemsException.php',
+        'WebPConvert\\Convert\\Exceptions\\ConversionFailed\\FileSystemProblems\\CreateDestinationFileException' => __DIR__ . '/..' . '/rosell-dk/webp-convert/src/Convert/Exceptions/ConversionFailed/FileSystemProblems/CreateDestinationFileException.php',
+        'WebPConvert\\Convert\\Exceptions\\ConversionFailed\\FileSystemProblems\\CreateDestinationFolderException' => __DIR__ . '/..' . '/rosell-dk/webp-convert/src/Convert/Exceptions/ConversionFailed/FileSystemProblems/CreateDestinationFolderException.php',
+        'WebPConvert\\Convert\\Exceptions\\ConversionFailed\\InvalidInputException' => __DIR__ . '/..' . '/rosell-dk/webp-convert/src/Convert/Exceptions/ConversionFailed/InvalidInputException.php',
+        'WebPConvert\\Convert\\Exceptions\\ConversionFailed\\InvalidInput\\ConverterNotFoundException' => __DIR__ . '/..' . '/rosell-dk/webp-convert/src/Convert/Exceptions/ConversionFailed/InvalidInput/ConverterNotFoundException.php',
+        'WebPConvert\\Convert\\Exceptions\\ConversionFailed\\InvalidInput\\InvalidImageTypeException' => __DIR__ . '/..' . '/rosell-dk/webp-convert/src/Convert/Exceptions/ConversionFailed/InvalidInput/InvalidImageTypeException.php',
+        'WebPConvert\\Convert\\Exceptions\\ConversionFailed\\InvalidInput\\TargetNotFoundException' => __DIR__ . '/..' . '/rosell-dk/webp-convert/src/Convert/Exceptions/ConversionFailed/InvalidInput/TargetNotFoundException.php',
+        'WebPConvert\\Convert\\Helpers\\JpegQualityDetector' => __DIR__ . '/..' . '/rosell-dk/webp-convert/src/Convert/Helpers/JpegQualityDetector.php',
+        'WebPConvert\\Convert\\Helpers\\PhpIniSizes' => __DIR__ . '/..' . '/rosell-dk/webp-convert/src/Convert/Helpers/PhpIniSizes.php',
+        'WebPConvert\\Exceptions\\InvalidInputException' => __DIR__ . '/..' . '/rosell-dk/webp-convert/src/Exceptions/InvalidInputException.php',
+        'WebPConvert\\Exceptions\\InvalidInput\\InvalidImageTypeException' => __DIR__ . '/..' . '/rosell-dk/webp-convert/src/Exceptions/InvalidInput/InvalidImageTypeException.php',
+        'WebPConvert\\Exceptions\\InvalidInput\\TargetNotFoundException' => __DIR__ . '/..' . '/rosell-dk/webp-convert/src/Exceptions/InvalidInput/TargetNotFoundException.php',
+        'WebPConvert\\Exceptions\\WebPConvertException' => __DIR__ . '/..' . '/rosell-dk/webp-convert/src/Exceptions/WebPConvertException.php',
+        'WebPConvert\\Helpers\\InputValidator' => __DIR__ . '/..' . '/rosell-dk/webp-convert/src/Helpers/InputValidator.php',
+        'WebPConvert\\Helpers\\MimeType' => __DIR__ . '/..' . '/rosell-dk/webp-convert/src/Helpers/MimeType.php',
+        'WebPConvert\\Helpers\\PathChecker' => __DIR__ . '/..' . '/rosell-dk/webp-convert/src/Helpers/PathChecker.php',
+        'WebPConvert\\Helpers\\Sanitize' => __DIR__ . '/..' . '/rosell-dk/webp-convert/src/Helpers/Sanitize.php',
+        'WebPConvert\\Loggers\\BaseLogger' => __DIR__ . '/..' . '/rosell-dk/webp-convert/src/Loggers/BaseLogger.php',
+        'WebPConvert\\Loggers\\BufferLogger' => __DIR__ . '/..' . '/rosell-dk/webp-convert/src/Loggers/BufferLogger.php',
+        'WebPConvert\\Loggers\\EchoLogger' => __DIR__ . '/..' . '/rosell-dk/webp-convert/src/Loggers/EchoLogger.php',
+        'WebPConvert\\Options\\ArrayOption' => __DIR__ . '/..' . '/rosell-dk/webp-convert/src/Options/ArrayOption.php',
+        'WebPConvert\\Options\\BooleanOption' => __DIR__ . '/..' . '/rosell-dk/webp-convert/src/Options/BooleanOption.php',
+        'WebPConvert\\Options\\Exceptions\\InvalidOptionTypeException' => __DIR__ . '/..' . '/rosell-dk/webp-convert/src/Options/Exceptions/InvalidOptionTypeException.php',
+        'WebPConvert\\Options\\Exceptions\\InvalidOptionValueException' => __DIR__ . '/..' . '/rosell-dk/webp-convert/src/Options/Exceptions/InvalidOptionValueException.php',
+        'WebPConvert\\Options\\Exceptions\\OptionNotFoundException' => __DIR__ . '/..' . '/rosell-dk/webp-convert/src/Options/Exceptions/OptionNotFoundException.php',
+        'WebPConvert\\Options\\GhostOption' => __DIR__ . '/..' . '/rosell-dk/webp-convert/src/Options/GhostOption.php',
+        'WebPConvert\\Options\\IntegerOption' => __DIR__ . '/..' . '/rosell-dk/webp-convert/src/Options/IntegerOption.php',
+        'WebPConvert\\Options\\IntegerOrNullOption' => __DIR__ . '/..' . '/rosell-dk/webp-convert/src/Options/IntegerOrNullOption.php',
+        'WebPConvert\\Options\\MetadataOption' => __DIR__ . '/..' . '/rosell-dk/webp-convert/src/Options/MetadataOption.php',
+        'WebPConvert\\Options\\Option' => __DIR__ . '/..' . '/rosell-dk/webp-convert/src/Options/Option.php',
+        'WebPConvert\\Options\\OptionFactory' => __DIR__ . '/..' . '/rosell-dk/webp-convert/src/Options/OptionFactory.php',
+        'WebPConvert\\Options\\Options' => __DIR__ . '/..' . '/rosell-dk/webp-convert/src/Options/Options.php',
+        'WebPConvert\\Options\\QualityOption' => __DIR__ . '/..' . '/rosell-dk/webp-convert/src/Options/QualityOption.php',
+        'WebPConvert\\Options\\SensitiveArrayOption' => __DIR__ . '/..' . '/rosell-dk/webp-convert/src/Options/SensitiveArrayOption.php',
+        'WebPConvert\\Options\\SensitiveStringOption' => __DIR__ . '/..' . '/rosell-dk/webp-convert/src/Options/SensitiveStringOption.php',
+        'WebPConvert\\Options\\StringOption' => __DIR__ . '/..' . '/rosell-dk/webp-convert/src/Options/StringOption.php',
+        'WebPConvert\\Serve\\Exceptions\\ServeFailedException' => __DIR__ . '/..' . '/rosell-dk/webp-convert/src/Serve/Exceptions/ServeFailedException.php',
+        'WebPConvert\\Serve\\Header' => __DIR__ . '/..' . '/rosell-dk/webp-convert/src/Serve/Header.php',
+        'WebPConvert\\Serve\\Report' => __DIR__ . '/..' . '/rosell-dk/webp-convert/src/Serve/Report.php',
+        'WebPConvert\\Serve\\ServeConvertedWebP' => __DIR__ . '/..' . '/rosell-dk/webp-convert/src/Serve/ServeConvertedWebP.php',
+        'WebPConvert\\Serve\\ServeConvertedWebPWithErrorHandling' => __DIR__ . '/..' . '/rosell-dk/webp-convert/src/Serve/ServeConvertedWebPWithErrorHandling.php',
+        'WebPConvert\\Serve\\ServeFile' => __DIR__ . '/..' . '/rosell-dk/webp-convert/src/Serve/ServeFile.php',
+        'WebPConvert\\WebPConvert' => __DIR__ . '/..' . '/rosell-dk/webp-convert/src/WebPConvert.php',
         'Webmozart\\Assert\\Assert' => __DIR__ . '/..' . '/webmozart/assert/src/Assert.php',
         'Webmozart\\Assert\\InvalidArgumentException' => __DIR__ . '/..' . '/webmozart/assert/src/InvalidArgumentException.php',
         'Webmozart\\Assert\\Mixin' => __DIR__ . '/..' . '/webmozart/assert/src/Mixin.php',

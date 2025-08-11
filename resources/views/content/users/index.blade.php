@@ -9,6 +9,63 @@
   </span> {{ $route }}
 </h4>
 
+
+<style>
+    select[name="usersTable_length"] {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    input[type="search"]{
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+
+    /* Container for DataTables search */
+.dataTables_filter {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 1rem;
+}
+
+/* Style the label text "Search:" */
+.dataTables_filter label {
+  font-weight: 500;
+  color: #888;
+  font-size: 14px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Style the search input */
+.dataTables_filter input[type="search"] {
+  font-family: inherit;
+  font-size: 14px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  transition: all 0.3s ease;
+}
+
+/* Hover effect */
+.dataTables_filter input[type="search"]:hover {
+  border-color: #999;
+}
+
+/* Focus effect */
+.dataTables_filter input[type="search"]:focus {
+  border-color: #38caef;
+  box-shadow: 0 0 5px rgba(56, 202, 239, 0.4);
+  outline: none;
+}
+
+    
+</style>
+
 <hr class="my-5" />
 
 <!-- Card -->
@@ -39,11 +96,11 @@
         <thead>
           <tr>
             <th><input type="checkbox" id="select-all"></th>
-            <th>{{ __('Name') }}</th>
-            <th>{{ __('Email') }}</th>
-            <th>{{ __('Users') }}</th>
-            <th>{{ __('Status') }}</th>
-            <th>{{ __('Actions') }}</th>
+            <th>{{ trns('Name') }}</th>
+            <th>{{ trns('Email') }}</th>
+            <th>{{ trns('Status') }}</th>
+            <th>{{ trns('image') }}</th>
+            <th>{{ trns('Actions') }}</th>
           </tr>
         </thead>
         <tbody></tbody>
@@ -70,7 +127,7 @@ $(document).ready(function () {
         serverSide: true,
         ajax: '{{ route($route . ".index") }}',
         columns: [
-            {
+        {
                 data: 'id',
                 orderable: false,
                 searchable: false,
@@ -80,50 +137,11 @@ $(document).ready(function () {
             },
             { data: 'name', name: 'name' },
             { data: 'email', name: 'email' },
-            {
-                data: null,
-                orderable: false,
-                searchable: false,
-                render: function () {
-                    return `
-                        <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-                            <li class="avatar avatar-xs pull-up me-1"><img src="{{ asset('assets/img/avatars/5.png') }}" class="rounded-circle"></li>
-                            <li class="avatar avatar-xs pull-up me-1"><img src="{{ asset('assets/img/avatars/6.png') }}" class="rounded-circle"></li>
-                            <li class="avatar avatar-xs pull-up me-1"><img src="{{ asset('assets/img/avatars/7.png') }}" class="rounded-circle"></li>
-                        </ul>`;
-                }
-            },
-            {
-                data: 'status',
-                name: 'status',
-                render: function (data) {
-                    let labelClass = 'bg-label-secondary';
-                    if (data === 'Active') labelClass = 'bg-label-primary';
-                    else if (data === 'Completed') labelClass = 'bg-label-success';
-                    else if (data === 'Scheduled') labelClass = 'bg-label-info';
-                    else if (data === 'Pending') labelClass = 'bg-label-warning';
-
-                    return `<span class="badge ${labelClass} me-1">${data}</span>`;
-                }
-            },
-            {
-                data: 'id',
-                orderable: false,
-                searchable: false,
-                render: function (id) {
-                    return `
-                        <div class="dropdown">
-                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                <i class="bx bx-dots-vertical-rounded"></i>
-                            </button>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="/${'{{ $route }}'}/${id}/edit"><i class="bx bx-edit-alt me-1"></i> Edit</a>
-                                <a class="dropdown-item text-danger" href="javascript:void(0);" onclick="deleteUser(${id})"><i class="bx bx-trash me-1"></i> Delete</a>
-                            </div>
-                        </div>`;
-                }
-            }
+            { data: 'status', name: 'status' },
+            { data: 'image', name: 'image' },
+            { data: 'action', name: 'action', orderable: false, searchable: false }
         ],
+
         order: [[1, "DESC"]],
         language: {
             sZeroRecords: "No records found",
@@ -187,4 +205,65 @@ function deleteUser(id) {
     toastr.info("Delete functionality not implemented");
 }
 </script>
+
+
+<script>
+        // for status
+        $(document).on('click', '.statusBtn', function() {
+            let id = $(this).data('id');
+
+            var val = $(this).is(':checked') ? 1 : 0;
+
+            let ids = [id];
+
+
+
+
+            $.ajax({
+                type: 'POST',
+                url: '{{ route($route . ".updateColumnSelected") }}',
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    'ids': ids,
+                },
+                success: function(data) {
+                    if (data.status === 200) {
+                        if (val !== 0) {
+                            toastr.success('Success', "");
+                            $("#usersTable").DataTable().ajax.reload();
+                        } else {
+                            toastr.warning('Success', "");
+                        }
+                    } else {
+                        toastr.error('Error', "");
+                    }
+                },
+                error: function() {
+                    toastr.error('Error', "{{ trns('something_went_wrong') }}");
+                }
+            });
+        });
+
+
+
+        $(document).on("change", "#statusSelection", function() {
+            let status = $(this).val();
+            let table = $('#dataTable').DataTable();
+
+            table.rows().every(function() {
+                var row = this.node();
+                var checkbox = $(row).find('.statusBtn');
+                var shouldShow = false;
+
+                if (status === 'show all') shouldShow = true;
+                else if (status === 'active') shouldShow = checkbox.is(':checked');
+                else if (status === 'inactive') shouldShow = !checkbox.is(':checked');
+
+                $(row).toggle(shouldShow);
+            });
+        });
+    </script>
+
+
+
 @endpush

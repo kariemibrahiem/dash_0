@@ -17,6 +17,22 @@ class UserController extends Controller
         return $this->service->create();
     }
 
+    public function store(Request $request){
+        // dd($request->all());
+        return $this->service->store($request);
+    }
+
+    public function edit($id){
+        return $this->service->edit($id);
+    }
+
+    public function update(Request $request, $id){
+        return $this->service->update($request, $id);
+    }
+
+    public function destroy($id){
+        return $this->service->destroy($id);
+    }
 
 
     public function updateColumnSelected(Request $request)

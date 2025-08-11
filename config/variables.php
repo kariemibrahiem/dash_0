@@ -2,7 +2,7 @@
   // Variables
   return [
     "creatorName" => "Kariem",
-    "creatorUrl" => "https://themeselection.com",
+    "creatorUrl" => "https://github.com/kariemibrahiem",
     "templateName" => "Matrex",
     "templateSuffix" => "Bootstrap 5 HTML Laravel Free Admin Template",
     "templateVersion" => "1.1.0",

@@ -29,6 +29,13 @@ class DatabaseSeeder extends Seeder
             "image"=>"testImage"
         ]);
 
+        Admin::latest()->first()->assignRole("super_admin");
+
+         
+        $this->call([
+            PermissionSeeder::class,
+            RoleSeeder::class,
+        ]);
         
     }
 }
