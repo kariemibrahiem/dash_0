@@ -49,6 +49,7 @@
           }
         @endphp
 
+        @can($menu->url)
         <li class="menu-item {{ $activeClass }}">
           <a href="{{ isset($menu->url) ? route($menu->url) : 'javascript:void(0);' }}"
              class="{{ isset($menu->submenu) ? 'menu-link menu-toggle' : 'menu-link' }}"
@@ -66,6 +67,7 @@
             @include('layouts.sections.menu.submenu',['menu' => $menu->submenu])
           @endisset
         </li>
+        @endcan
       @endif
 
     @endforeach

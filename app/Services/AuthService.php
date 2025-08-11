@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Admin;
 use Illuminate\Support\Facades\Auth;
 use App\Services\BaseService;
+use Exception;
 use Illuminate\Support\Facades\Hash;
 
 
@@ -17,38 +18,43 @@ class AuthService
 
     public function login($request)
     {
-        $data = $request->validate(
-            [
-                'email-username' => 'required|string',
-                'password' => 'required|string',
-                'remeber' => 'nullable',
-            ],
-            [
-                'email-username.required' => 'يرجى إدخال البريد الإلكتروني أو اسم المستخدم',
-                'password.required' => 'يرجى إدخال كلمة المرور',
-            ]
-        );
+        try{
+            $data = $request->validate(
+                [
+                    'email-username' => 'required|string',
+                    'password' => 'required|string',
+                    'remeber' => 'nullable',
+                ],
+                [
+                    'email-username.required' => 'يرجى إدخال البريد الإلكتروني أو اسم المستخدم',
+                    'password.required' => 'يرجى إدخال كلمة المرور',
+                ]
+            );
 
-        $loginInput = $data['email-username'];
-        $password = $data['password'];
+            $loginInput = $data['email-username'];
+            $password = $data['password'];
 
-        $fieldType = filter_var($loginInput, FILTER_VALIDATE_EMAIL) ? 'email' : 'user_name';
+            $fieldType = filter_var($loginInput, FILTER_VALIDATE_EMAIL) ? 'email' : 'user_name';
 
-        $credentials = [
-            $fieldType => $loginInput,
-            'password' => $password,
-        ];
-        $admin = Admin::where("email" , $data['email-username'])->first();
-       
+            $credentials = [
+                $fieldType => $loginInput,
+                'password' => $password,
+            ];
+            $admin = Admin::where("email" , $data['email-username'])->first();
+        
 
-        if ($admin && Hash::check($password, $admin->password)) {
-            Auth::guard('admin')->login($admin, !empty($data['remember']));
+            if ($admin && Hash::check($password, $admin->password)) {
+                Auth::guard('admin')->login($admin, !empty($data['remember']));
 
-            toastr()->success("login successfully");
-            return redirect()->route('dashboard-analytics');
+                toastr()->success("login successfully");
+                return redirect()->route('dashboard-analytics');
+            }
+            toastr()->error(trns("error in login field"));
+            return back();
+        }catch(Exception $e){
+            toastr()->error("login field");
+            return redirect()->back();
         }
-        toastr()->error(trns("error in login field"));
-        return back();
     }
 
 

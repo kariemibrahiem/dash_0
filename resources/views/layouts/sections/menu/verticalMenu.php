@@ -19,13 +19,16 @@ return [
             (object)[
                 'name' => 'All Users',
                 'url' => 'users',
+                "permissions" => "users_read",
                 'slug' => 'users',
             ],
             (object)[
                 'name' => 'Create User',
-                'url' => 'users.create',
+                'url' => 'users/create',
+                "permissions" => "users_create",
                 'slug' => 'users.create',
             ]
         ]
     ]
+
 ];
