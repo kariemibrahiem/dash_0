@@ -21,6 +21,7 @@ class AuthService
             [
                 'email-username' => 'required|string',
                 'password' => 'required|string',
+                'remeber' => 'nullable',
             ],
             [
                 'email-username.required' => 'يرجى إدخال البريد الإلكتروني أو اسم المستخدم',
@@ -41,10 +42,12 @@ class AuthService
        
 
         if ($admin && Hash::check($password, $admin->password)) {
-            Auth::guard('admin')->login($admin, false); 
+            Auth::guard('admin')->login($admin, !empty($data['remember']));
+
+            toastr()->success("login successfully");
             return redirect()->route('dashboard-analytics');
         }
-        flash()->error("error on login");
+        toastr()->error(trns("error in login field"));
         return back();
     }
 
@@ -52,7 +55,7 @@ class AuthService
     public function logout()
     {
         Auth::guard('admin')->logout();
-        toastr()->info('تم تسجيل الخروج');
-        return redirect()->route('admin.login');
+        toastr()->info(trns("logout successfully"));
+        return redirect()->route('dashboard-analytics');
     }
 }

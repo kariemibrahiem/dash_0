@@ -3,6 +3,11 @@ $containerNav = $containerNav ?? 'container-fluid';
 $navbarDetached = ($navbarDetached ?? '');
 
 @endphp
+<style>
+  .logout-link:hover {
+    color: red !important;
+  }
+</style>
 
 <!-- Navbar -->
 @if(isset($navbarDetached) && $navbarDetached == 'navbar-detached')
@@ -42,6 +47,15 @@ $navbarDetached = ($navbarDetached ?? '');
         </div>
         <!-- /Search -->
         <ul class="navbar-nav flex-row align-items-center ms-auto">
+                <div class="dropdown">
+                  <button class="btn btn-sm btn-light dropdown-toggle" data-bs-toggle="dropdown">
+                      🌐 {{ strtoupper(app()->getLocale()) }}
+                  </button>
+                  <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="{{ route('change_language', 'en') }}">English</a></li>
+                      <li><a class="dropdown-item" href="{{ route('change_language', 'ar') }}">العربية</a></li>
+                  </ul>
+              </div>
 
           <!-- Place this tag where you want the button to render. -->
           <!-- <li class="nav-item lh-1 me-3">
@@ -50,6 +64,7 @@ $navbarDetached = ($navbarDetached ?? '');
 
           <!-- User -->
           <li class="nav-item navbar-dropdown dropdown-user dropdown">
+            
             <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
               <div class="avatar avatar-online">
                 <img src="{{ asset('assets/img/avatars/1.png') }}" alt class="w-px-40 h-auto rounded-circle">
@@ -65,8 +80,8 @@ $navbarDetached = ($navbarDetached ?? '');
                       </div>
                     </div>
                     <div class="flex-grow-1">
-                      <span class="fw-medium d-block">John Doe</span>
-                      <small class="text-muted">Admin</small>
+                      <span class="fw-medium d-block">{{auth("admin")->user()->user_name}}</span>
+                      <!-- <small class="text-muted">Admin</small> -->
                     </div>
                   </div>
                 </a>
@@ -100,8 +115,10 @@ $navbarDetached = ($navbarDetached ?? '');
               </li>
               <li>
                 <a class="dropdown-item" href="javascript:void(0);">
-                  <i class='bx bx-power-off me-2'></i>
-                  <span class="align-middle">Log Out</span>
+                  <a class="dropdown-item logout-link" href="{{ route('admin.logout') }}">
+                      <i class='bx bx-power-off me-2'></i>
+                      {{ trns('logout') }}
+                  </a>
                 </a>
               </li>
             </ul>

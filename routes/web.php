@@ -42,12 +42,21 @@ use App\Http\Controllers\form_elements\BasicInput;
 use App\Http\Controllers\form_elements\InputGroups;
 use App\Http\Controllers\form_layouts\VerticalForm;
 use App\Http\Controllers\form_layouts\HorizontalForm;
+use App\Http\Controllers\SettingController;
 use App\Http\Controllers\tables\Basic as TablesBasic;
+use App\Http\Controllers\UserController;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 // Main Page Route
+Route::group(['prefix' => LaravelLocalization::setLocale()], function(){
 
 Route::group(["middleware" => "auth:admin"], function(){
     Route::get('/', [Analytics::class, 'index'])->name('dashboard-analytics');
+    Route::get('change_language/{id}', [SettingController::class, 'changeLanguage'])->name('change_language');
+    Route::post('/user/updateColumnSelected', [UserController::class, 'updateColumnSelected'])->name('users.updateColumnSelected');
+    Route::resource("users" , UserController::class);
+
+
 });
 
 // layout
@@ -66,6 +75,7 @@ Route::get('/pages/misc-under-maintenance', [MiscUnderMaintenance::class, 'index
 
 // authentication
 Route::get('/auth/login-basic', [LoginBasic::class, 'index'])->name('auth-login-basic');
+Route::get("admin.logout" , [LoginBasic::class , "logout"])->name("admin.logout");
 Route::post('/auth/login', [LoginBasic::class, 'login'])->name('login');
 Route::get('/auth/register-basic', [RegisterBasic::class, 'index'])->name('auth-register-basic');
 Route::get('/auth/forgot-password-basic', [ForgotPasswordBasic::class, 'index'])->name('auth-reset-password-basic');
@@ -111,3 +121,6 @@ Route::get('/form/layouts-horizontal', [HorizontalForm::class, 'index'])->name('
 
 // tables
 Route::get('/tables/basic', [TablesBasic::class, 'index'])->name('tables-basic');
+
+
+});

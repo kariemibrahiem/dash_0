@@ -25,7 +25,7 @@
       {{-- menu headers --}}
       @if (isset($menu->menuHeader))
         <li class="menu-header small text-uppercase">
-          <span class="menu-header-text">{{ __($menu->menuHeader) }}</span>
+          <span class="menu-header-text">{{ trns($menu->menuHeader) }}</span>
         </li>
       @else
         @php
@@ -56,7 +56,7 @@
             @isset($menu->icon)
               <i class="{{ $menu->icon }}"></i>
             @endisset
-            <div>{{ __($menu->name ?? '') }}</div>
+            <div>{{ trns($menu->name ?? '') }}</div>
             @isset($menu->badge)
               <div class="badge bg-{{ $menu->badge[0] }} rounded-pill ms-auto">{{ $menu->badge[1] }}</div>
             @endisset
