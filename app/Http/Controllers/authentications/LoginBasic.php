@@ -17,4 +17,8 @@ class LoginBasic extends Controller
   public function login(Request $request){
     return $this->service->login($request);
   }
+
+  public function logout(){
+    return $this->service->logout();
+  }
 }

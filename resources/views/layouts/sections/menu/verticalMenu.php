@@ -13,17 +13,17 @@ return [
     (object)[
         'name' => 'Users',
         'icon' => 'bx bx-user',
-        'url' => 'dashboard-analytics',
+        'url' => 'users.index',
         'slug' => 'users',
         'submenu' => [
             (object)[
                 'name' => 'All Users',
-                'url' => 'dashboard-analytics',
-                'slug' => 'users.index',
+                'url' => 'users',
+                'slug' => 'users',
             ],
             (object)[
                 'name' => 'Create User',
-                'url' => 'dashboard-analytics',
+                'url' => 'users.create',
                 'slug' => 'users.create',
             ]
         ]
