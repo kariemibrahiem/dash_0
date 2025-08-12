@@ -1341,4 +1341,5 @@ Stack Trace:
   'leave_blank_to_keep_current' => 'Leave Blank To Keep Current',
   'password_confirm' => 'Password Confirm',
   'created_at' => 'Created At',
+  'AJAX Error' => 'AJAX Error',
 );

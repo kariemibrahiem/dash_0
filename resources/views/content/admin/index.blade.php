@@ -95,7 +95,10 @@
       <table class="table table-bordered" id="dataTable">
         <thead>
           <tr>
-            <th><input type="checkbox" id="select-all"></th>
+            <th>{{ trns('user_name') }}</th>
+            <th>{{ trns('email') }}</th>
+            <th>{{ trns('code') }}</th>
+            <th>{{ trns('created_at') }}</th>
             <th>{{ trns('Actions') }}</th>
           </tr>
         </thead>
@@ -123,14 +126,10 @@ $(document).ready(function () {
         serverSide: true,
         ajax: '{{ route($route . ".index") }}',
         columns: [
-                {
-                  data: 'id',
-                  orderable: false,
-                  searchable: false,
-                  render: function(data) {
-                      return `<input type="checkbox" class="row-checkbox" value="${data}">`;
-                }
-            },
+            { data: 'user_name', name: 'user_name' },
+            { data: 'email', name: 'email' },
+            { data: 'code', name: 'code' },
+            { data: 'created_at', name: 'created_at' },
             { data: 'action', name: 'action', orderable: false, searchable: false }
         ],
 
@@ -145,56 +144,7 @@ $(document).ready(function () {
             }
         }
     });
-
-    $('#select-all').on('click', function () {
-        const rows = table.rows({ search: 'applied' }).nodes();
-        $('input[type="checkbox"].row-checkbox', rows).prop('checked', this.checked);
-    });
-
-    $('#usersTable tbody').on('change', 'input.row-checkbox', function () {
-        if (!this.checked) {
-            $('#select-all').prop('checked', false);
-        }
-    });
-
-    $('#bulkStatusUpdate').on('click', function () {
-        const selectedIds = [];
-        $('input.row-checkbox:checked').each(function () {
-            selectedIds.push($(this).val());
-        });
-
-        if (selectedIds.length === 0) {
-            Swal.fire({
-                icon: 'warning',
-                title: '{{ trns("No selection") }}',
-                text: '{{ trns("Please select at least one user.") }}',
-                confirmButtonText: '{{ trns("OK") }}'
-            });
-            return;
-        }
-
-
-        $.ajax({
-            type: 'POST',
-            url: '{{ route($route . ".updateColumnSelected") }}',
-            data: {
-                _token: '{{ csrf_token() }}',
-                ids: selectedIds,
-                status: 'Active' 
-            },
-            success: function (data) {
-                if (data.status === 200) {
-                    toastr.success("Updated Successfully");
-                    table.ajax.reload();
-                } else {
-                    toastr.error("Something went wrong");
-                }
-            },
-            error: function () {
-                toastr.error("AJAX Error");
-            }
-        });
-    });
+    
 });
 
 function deleteUser(id) {
