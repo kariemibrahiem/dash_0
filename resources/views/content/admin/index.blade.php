@@ -131,10 +131,6 @@ $(document).ready(function () {
                       return `<input type="checkbox" class="row-checkbox" value="${data}">`;
                 }
             },
-            { data: 'user_name', name: 'user_name' },
-            { data: 'email', name: 'email' },
-            { data: 'code', name: 'code' },
-            { data: 'created_at', name: 'created_at' },
             { data: 'action', name: 'action', orderable: false, searchable: false }
         ],
 
