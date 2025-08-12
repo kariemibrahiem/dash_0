@@ -96,10 +96,6 @@
         <thead>
           <tr>
             <th><input type="checkbox" id="select-all"></th>
-            <th>{{ trns('user_name') }}</th>
-            <th>{{ trns('email') }}</th>
-            <th>{{ trns('code') }}</th>
-            <th>{{ trns('created_at') }}</th>
             <th>{{ trns('Actions') }}</th>
           </tr>
         </thead>
