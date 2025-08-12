@@ -92,14 +92,14 @@
 
   <div class="card-body">
     <div class="table-responsive text-nowrap">
-      <table class="table table-bordered" id="usersTable">
+      <table class="table table-bordered" id="dataTable">
         <thead>
           <tr>
             <th><input type="checkbox" id="select-all"></th>
-            <th>{{ trns('Name') }}</th>
-            <th>{{ trns('Email') }}</th>
-            <th>{{ trns('Status') }}</th>
-            <th>{{ trns('image') }}</th>
+            <th>{{ trns('user_name') }}</th>
+            <th>{{ trns('email') }}</th>
+            <th>{{ trns('code') }}</th>
+            <th>{{ trns('created_at') }}</th>
             <th>{{ trns('Actions') }}</th>
           </tr>
         </thead>
@@ -122,23 +122,23 @@
 
 <script>
 $(document).ready(function () {
-    const table = $('#usersTable').DataTable({
+    const table = $('#dataTable').DataTable({
         processing: true,
         serverSide: true,
         ajax: '{{ route($route . ".index") }}',
         columns: [
-        {
-                data: 'id',
-                orderable: false,
-                searchable: false,
-                render: function(data) {
-                    return `<input type="checkbox" class="row-checkbox" value="${data}">`;
+                {
+                  data: 'id',
+                  orderable: false,
+                  searchable: false,
+                  render: function(data) {
+                      return `<input type="checkbox" class="row-checkbox" value="${data}">`;
                 }
             },
-            { data: 'name', name: 'name' },
+            { data: 'user_name', name: 'user_name' },
             { data: 'email', name: 'email' },
-            { data: 'status', name: 'status' },
-            { data: 'image', name: 'image' },
+            { data: 'code', name: 'code' },
+            { data: 'created_at', name: 'created_at' },
             { data: 'action', name: 'action', orderable: false, searchable: false }
         ],
 
@@ -188,7 +188,7 @@ $(document).ready(function () {
             data: {
                 _token: '{{ csrf_token() }}',
                 ids: selectedIds,
-                status: 'Active' // or 1, depending on your backend
+                status: 'Active' 
             },
             success: function (data) {
                 if (data.status === 200) {
@@ -207,7 +207,6 @@ $(document).ready(function () {
 
 function deleteUser(id) {
     if (!confirm("Are you sure you want to delete this user?")) return;
-    // Implement delete logic or AJAX here
     toastr.info("Delete functionality not implemented");
 }
 </script>
@@ -221,10 +220,6 @@ function deleteUser(id) {
             var val = $(this).is(':checked') ? 1 : 0;
 
             let ids = [id];
-
-
-
-
             $.ajax({
                 type: 'POST',
                 url: '{{ route($route . ".updateColumnSelected") }}',

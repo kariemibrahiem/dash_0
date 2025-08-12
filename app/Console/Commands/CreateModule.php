@@ -27,7 +27,7 @@ class CreateModule extends Command
      */
     public function handle()
     {
-        $enumFile = app_path('Enums/PermissionEnum.php');
+        $enumFile = app_path('Enums/PermissionEnums.php');
         $name = $this->argument('name');
         $namespace = 'App';
         $modelName = Str::studly($name);
@@ -37,139 +37,172 @@ class CreateModule extends Command
 
         // Create Model
         $modelPath = app_path("Models/{$modelName}.php");
-        if (!File::exists($modelPath)) {
+
+        if (File::exists($modelPath)) {
+            $this->warn("Model {$modelName} already exists! Skipping creation.");
+        } else {
             File::put($modelPath, $this->getModelStub($modelName));
-            $this->info("Model {$modelName} created successfully.");
+            $this->info("Model {$modelName} created successfully, upgraded by Kariem developer.");
         }
+
 
         // Create Migration
         $tableName = Str::snake(Str::pluralStudly($name));
         $migrationName = "create_{$tableName}_table";
-        $migrationPath = database_path("migrations/" . date('Y_m_d_His') . "_{$migrationName}.php");
-        if (!File::exists($migrationPath)) {
+
+        // Check if a migration for this table already exists
+        $existingMigration = collect(File::files(database_path('migrations')))
+            ->contains(function ($file) use ($migrationName) {
+                return Str::contains($file->getFilename(), $migrationName);
+            });
+
+        if ($existingMigration) {
+            $this->warn("Migration for table '{$tableName}' already exists! Skipping creation.");
+        } else {
             $this->call('make:migration', [
                 'name' => $migrationName,
                 '--create' => $tableName,
             ]);
-            $this->info("Migration {$migrationName} created successfully.");
+            $this->info("Migration {$migrationName} created successfully, upgraded by Kariem developer.");
         }
+
 
         // Create Controller
         $controllerPath = app_path("Http/Controllers/Admin/{$controllerName}.php");
-        if (!File::exists($controllerPath)) {
+
+        if (File::exists($controllerPath)) {
+            $this->warn("Controller {$controllerName} already exists! Skipping creation.");
+        } else {
             File::ensureDirectoryExists(app_path('Http/Controllers/Admin'));
             File::put($controllerPath, $this->getControllerStub($modelName, $serviceName));
-            $this->info("Controller {$controllerName} created successfully.");
+            $this->info("Controller {$controllerName} created successfully, upgraded by Kariem developer.");
         }
+
 
         // Create Service
         $servicePath = app_path("Services/Admin/{$serviceName}.php");
-        if (!File::exists($servicePath)) {
+
+        if (File::exists($servicePath)) {
+            $this->warn("Service {$serviceName} already exists! Skipping creation.");
+        } else {
             File::ensureDirectoryExists(app_path('Services/Admin'));
             File::put($servicePath, $this->getServiceStub($modelName));
-            $this->info("Service {$serviceName} created successfully.");
+            $this->info("Service {$serviceName} created successfully, upgraded by Kariem developer.");
         }
+
 
         // Create Request
         $requestPath = app_path("Http/Requests/{$requestName}.php");
-        if (!File::exists($requestPath)) {
+
+        if (File::exists($requestPath)) {
+            $this->warn("Request {$requestName} already exists! Skipping creation.");
+        } else {
             File::ensureDirectoryExists(app_path('Http/Requests'));
             File::put($requestPath, $this->getRequestStub($modelName));
-            $this->info("Request {$requestName} created successfully.");
+            $this->info("Request {$requestName} created successfully, upgraded by Kariem developer.");
         }
-        // copy folder name example-module to name new model in views
+
+       // Copy folder name example-module to name new model in views
         $folderName = strtolower(Str::snake($modelName)); 
-        $folderPath = resource_path("views/admin/{$folderName}");
-        if (!File::exists($folderPath)) {
+        $folderPath = resource_path("views/content/{$folderName}");
+
+        if (File::exists($folderPath)) {
+            $this->warn("Folder {$folderName} already exists! Skipping creation.");
+        } else {
             File::ensureDirectoryExists(resource_path('views/content'));
             File::copyDirectory(resource_path('views/example-module'), $folderPath);
-            $this->info("Folder {$folderName} created successfully.");
+            $this->info("Folder {$folderName} created successfully, upgraded by Kariem developer.");
         }
+
 
         // Create Routes
         $this->addResourceRoute($modelName, $folderName);
 
-        // create the enum 
-        $upper = strtoupper($modelName);
-        $lower = strtolower($modelName);
+        // Create the enum
+        $upper = strtoupper($modelName) . "s";
+        $lower = strtolower($modelName) . "s";
         $newLine = "    case {$upper} = \"{$lower}\";" . PHP_EOL;
-
-
 
         if (File::exists($enumFile)) {
             $content = File::get($enumFile);
 
-
             if (!str_contains($content, "case {$upper} = \"{$lower}\";")) {
-                    $content = preg_replace(
-                        '/(\n\s*public function label\(\): string)/',
-                        PHP_EOL . $newLine . '$1',
-                        $content
-                    );
+                $content = preg_replace(
+                    '/(\n\s*public function label\(\): string)/',
+                    PHP_EOL . $newLine . '$1',
+                    $content
+                );
 
-                    File::put($enumFile, $content);
-                    $this->info("Enum case {$upper} added to PermissionEnums.");
-                } else {
-                    $this->warn("Enum case {$upper} already exists.");
-                }
+                File::put($enumFile, $content);
+                $this->info("Enum case {$upper} added to PermissionEnums, upgraded by Kariem developer.");
             } else {
-                $this->error("PermissionEnums.php not found.");
+                $this->warn("Enum case {$upper} already exists! Skipping creation.");
             }
+        } else {
+            $this->error("PermissionEnums.php not found.");
+        }
 
-            $this->info("Module {$modelName} created successfully.");
 
-            // create the sidebar tag
-            $sidebarFile = resource_path("views/layouts/sections/menu/verticalMenu.php");
+        // create the sidebar tag
+        $sidebarFile = resource_path("views/layouts/sections/menu/verticalMenu.php");
 
-            $labelName = Str::headline($modelName); 
-            $slugName  = Str::snake(Str::pluralStudly($modelName));
+        $labelName = Str::headline($modelName);
+        $slugName  = Str::snake(Str::pluralStudly($modelName));
+        $menuHeader = Str::headline($modelName) . " Management";
 
-            $sidebarTag = <<<PHP
-            (object)[
-                'name' => '{$labelName}',
-                'icon' => 'bx bx-user',
-                'url' => '{$slugName}.index',
-                "permissions" => "{$slugName}_read",
-                'slug' => '{$slugName}',
-                'submenu' => [
-                    (object)[
-                        'name' => 'All {$labelName}',
-                        'url' => '{$slugName}',
-                        "permissions" => "{$slugName}_read",
-                        'slug' => '{$slugName}',
-                    ],
-                    (object)[
-                        'name' => 'Create {$modelName}',
-                        'url' => '{$slugName}/create',
-                        "permissions" => "{$slugName}_create",
-                        'slug' => '{$slugName}.create',
-                    ]
+        $sidebarTag = <<<PHP
+        (object)[
+            'menuHeader' => '{$menuHeader}',
+        ],
+        (object)[
+            'name' => '{$labelName}',
+            'icon' => 'bx bx-user',
+            'url' => '{$slugName}.index',
+            "permissions" => "{$slugName}_read",
+            'slug' => '{$slugName}',
+            'submenu' => [
+                (object)[
+                    'name' => 'All {$labelName}',
+                    'url' => '{$slugName}',
+                    "permissions" => "{$slugName}_read",
+                    'slug' => '{$slugName}',
+                ],
+                (object)[
+                    'name' => 'Create {$modelName}',
+                    'url' => '{$slugName}/create',
+                    "permissions" => "{$slugName}_create",
+                    'slug' => '{$slugName}.create',
                 ]
             ]
-            PHP;
+        ]
+        PHP;
 
-            if (File::exists($sidebarFile)) {
-                $content = File::get($sidebarFile);
+        if (File::exists($sidebarFile)) {
+            $content = File::get($sidebarFile);
 
-                if (!Str::contains($content, "'slug' => '{$slugName}'")) {
-                    if (preg_match('/return\s*\[.*\];/s', $content)) {
-                        $content = preg_replace(
-                            '/(\];\s*)$/',
-                            ",\n    {$sidebarTag}\n]$1",
-                            $content
-                        );
-                        File::put($sidebarFile, $content);
-                        $this->info("Sidebar array entry for {$slugName} added successfully.");
-                    } else {
-                        File::append($sidebarFile, "\n" . $sidebarTag . ",\n");
-                        $this->info("Sidebar object for {$slugName} added successfully.");
-                    }
+            // Check if already exists
+            if (!Str::contains($content, "'slug' => '{$slugName}'")) {
+                // Try to insert before the closing array bracket
+                if (preg_match('/return\s*\[.*\];/s', $content)) {
+                    $content = preg_replace(
+                        '/(\];\s*)$/',
+                        ",\n    {$sidebarTag}\n]$1",
+                        $content
+                    );
+                    File::put($sidebarFile, $content);
+                    $this->info("Sidebar entry for {$slugName} added successfully, upgraded by Kariem developer.");
                 } else {
-                    $this->warn("Sidebar for {$slugName} already exists.");
+                    // If array format not found, append to file
+                    File::append($sidebarFile, "\n" . $sidebarTag . ",\n");
+                    $this->info("Sidebar object for {$slugName} added successfully, upgraded by Kariem developer.");
                 }
             } else {
-                $this->error("Sidebar file not found: {$sidebarFile}");
+                $this->warn("Sidebar for {$slugName} already exists, upgraded by Kariem developer.");
             }
+        } else {
+            $this->error("Sidebar file not found: {$sidebarFile}");
+        }
+
 
         
         }
@@ -204,6 +237,7 @@ use App\Http\Requests\\{$modelName}Request as ObjRequest;
 use App\Models\\{$modelName} as ObjModel;
 use App\Services\Admin\\{$serviceName} as ObjService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class {$modelName}Controller extends Controller
 {
@@ -420,15 +454,40 @@ EOT;
     {
         $routeFile = base_path('routes/web.php');
 
-        // Check if the route already exists to avoid duplication
-        $routePattern = "Route::customResource('{$folderName}s'";
-        if (!File::exists($routeFile) || strpos(file_get_contents($routeFile), $routePattern) !== false) {
-            return; // Route already exists, do nothing
+        if (!File::exists($routeFile)) {
+            $this->error("The routes/web.php file was not found.");
+            return;
         }
 
-        // If not, add the resource route at the end of the file
-        File::append($routeFile, "\nRoute::resourceWithDeleteSelected('{$folderName}s', \App\Http\Controllers\Admin\\{$modelName}Controller::class);\n");
+        $routePattern = "Route::resource('{$folderName}s'";
+        $fileContent = file_get_contents($routeFile);
 
-        $this->info("Resource route for {$folderName}s created successfully.");
+        if (strpos($fileContent, $routePattern) !== false) {
+            $this->warn("Resource route for '{$folderName}s' already exists! Skipping creation.");
+            return;
+        }
+
+        $searchPattern = '/(Route::group\(\s*\[.*?auth:admin.*?\],\s*function\s*\(\)\s*\{)(.*?)(\}\);)/s';
+
+        if (preg_match($searchPattern, $fileContent, $matches)) {
+            $newRoutes = <<<EOT
+
+        Route::resource('{$folderName}s', \\App\\Http\\Controllers\\Admin\\{$modelName}Controller::class);
+        Route::post('/{$folderName}s/updateColumnSelected', [\\App\\Http\\Controllers\\Admin\\{$modelName}Controller::class, 'updateColumnSelected'])
+            ->name('{$folderName}s.updateColumnSelected');
+    EOT;
+
+            $updatedGroup = $matches[1] . $matches[2] . $newRoutes . "\n" . $matches[3];
+
+            $fileContent = preg_replace($searchPattern, $updatedGroup, $fileContent);
+
+            File::put($routeFile, $fileContent);
+            $this->info("Resource route + updateColumnSelected for '{$folderName}s' added inside auth:admin group successfully.");
+        } else {
+            $this->error("Could not find auth:admin group in routes/web.php");
+        }
     }
+
+
+
 }

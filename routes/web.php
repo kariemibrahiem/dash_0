@@ -57,6 +57,9 @@ Route::group(["middleware" => "auth:admin"], function(){
     Route::resource("users" , UserController::class);
 
 
+    Route::get('/admins/profile', [\App\Http\Controllers\Admin\AdminController::class, 'profile'])->name('admins.profile');
+    Route::resource('admins', \App\Http\Controllers\Admin\AdminController::class);
+    Route::post('/admins/updateColumnSelected', [\App\Http\Controllers\Admin\AdminController::class, 'updateColumnSelected'])->name('admins.updateColumnSelected');
 });
 
 // layout
@@ -124,3 +127,4 @@ Route::get('/tables/basic', [TablesBasic::class, 'index'])->name('tables-basic')
 
 
 });
+
