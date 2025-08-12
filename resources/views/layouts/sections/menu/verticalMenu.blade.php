@@ -20,6 +20,7 @@
 
   <div class="menu-inner-shadow"></div>
   <ul class="menu-inner py-1">
+
     @foreach ($menuData as $menu)
 
       {{-- menu headers --}}
@@ -49,7 +50,7 @@
           }
         @endphp
 
-        @can($menu->url)
+        @if($menu->permissions === 'dashboard' || auth()->user()->can($menu->permissions))
         <li class="menu-item {{ $activeClass }}">
           <a href="{{ isset($menu->url) ? route($menu->url) : 'javascript:void(0);' }}"
              class="{{ isset($menu->submenu) ? 'menu-link menu-toggle' : 'menu-link' }}"

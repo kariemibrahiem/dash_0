@@ -44,9 +44,7 @@
   "autoload-dev": {
     "psr-4": {
       "Tests\\": "tests/"
-    },"files":[
-            "app/Http/Hepler/helper.php"
-        ]
+    }
   },
   "scripts": {
     "post-autoload-dump": [
