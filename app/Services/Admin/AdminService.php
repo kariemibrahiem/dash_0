@@ -4,7 +4,9 @@ namespace App\Services\Admin;
 
 use App\Models\Admin as ObjModel;
 use App\Services\BaseService;
+use Flasher\Laravel\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\DataTables;
 
@@ -72,9 +74,10 @@ class AdminService extends BaseService
     public function store($data)
     {
         try {
-            $data['code'] = rand(100000, 999999); 
-            $this->createData($data->only($this->model->getFillable()));
-
+            $data['code'] = rand(100000, 999999) . Str::random(5); 
+            $this->createData(
+                collect($data)->only($this->model->getFillable())->toArray()
+            );
             if (request()->ajax()) {
                 return response()->json(['status' => 200, 'message' => "تمت العملية بنجاح"]);
             }

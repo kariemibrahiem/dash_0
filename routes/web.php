@@ -37,6 +37,7 @@ use App\Http\Controllers\user_interface\TooltipsPopovers;
 use App\Http\Controllers\user_interface\Typography;
 use App\Http\Controllers\extended_ui\PerfectScrollbar;
 use App\Http\Controllers\extended_ui\TextDivider;
+use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\icons\Boxicons;
 use App\Http\Controllers\form_elements\BasicInput;
 use App\Http\Controllers\form_elements\InputGroups;
@@ -60,7 +61,15 @@ Route::group(["middleware" => "auth:admin"], function(){
     Route::get('/admins/profile', [\App\Http\Controllers\Admin\AdminController::class, 'profile'])->name('admins.profile');
     Route::resource('admins', \App\Http\Controllers\Admin\AdminController::class);
     Route::post('/admins/updateColumnSelected', [\App\Http\Controllers\Admin\AdminController::class, 'updateColumnSelected'])->name('admins.updateColumnSelected');
+
 });
+Route::post("reset-password", [ForgotPasswordController::class, 'resetPassword'])->name("reset-password");
+
+
+Route::get("check-otp", [ForgotPasswordController::class, 'showCheckOtp'])->name("show-check-otp");
+
+
+Route::post("verify-otp", [ForgotPasswordController::class, 'CheckOtp'])->name("verify-otp");
 
 // layout
 Route::get('/layouts/without-menu', [WithoutMenu::class, 'index'])->name('layouts-without-menu');
