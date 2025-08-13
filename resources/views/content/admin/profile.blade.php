@@ -43,6 +43,9 @@
                             <tr>
                                 <td><strong>{{ trns('name') }}:</strong> {{ $admin->user_name }}</td>
                             </tr>
+                             <tr>
+                                <td><strong>{{ trns('code') }}:</strong> {{ $admin->code }}</td>
+                            </tr>
                             <tr>
                                 <td><strong>{{ trns('email') }}:</strong> {{ $admin->email }}</td>
                             </tr>

@@ -1,6 +1,6 @@
 @extends('layouts/blankLayout')
 
-@section('title', 'Forgot Password Basic - Pages')
+@section('title', trns('Forgot Password Basic - Pages'))
 
 @section('page-style')
 <!-- Page -->
@@ -11,6 +11,15 @@
 <div class="container-xxl">
   <div class="authentication-wrapper authentication-basic container-p-y">
     <div class="authentication-inner py-4">
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul class="mb-0">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
 
       <!-- Forgot Password -->
       <div class="card">
@@ -23,19 +32,21 @@
             </a>
           </div>
           <!-- /Logo -->
-          <h4 class="mb-2">Forgot Password? 🔒</h4>
-          <p class="mb-4">Enter your email and we'll send you instructions to reset your password</p>
-          <form id="formAuthentication" class="mb-3" action="{{url('/')}}" method="GET">
+          <h4 class="mb-2">{{ trns('Forgot Password?') }} 🔒</h4>
+          <p class="mb-4">{{ trns("Enter your email and we'll send you instructions to reset your password") }}</p>
+          <form id="formAuthentication" class="mb-3" action="{{route('reset-password')}}" method="POST">
+            @csrf
+            @method('POST')
             <div class="mb-3">
-              <label for="email" class="form-label">Email</label>
-              <input type="text" class="form-control" id="email" name="email" placeholder="Enter your email" autofocus>
+              <label for="email" class="form-label">{{ trns('Email') }}</label>
+              <input type="text" class="form-control" id="email" name="email" placeholder="{{ trns('Enter your email') }}" autofocus>
             </div>
-            <button class="btn btn-primary d-grid w-100">Send Reset Link</button>
+            <button class="btn btn-primary d-grid w-100">{{ trns('Send Reset Link') }}</button>
           </form>
           <div class="text-center">
             <a href="{{url('auth/login-basic')}}" class="d-flex align-items-center justify-content-center">
               <i class="bx bx-chevron-left scaleX-n1-rtl bx-sm"></i>
-              Back to login
+              {{ trns('Back to login') }}
             </a>
           </div>
         </div>
