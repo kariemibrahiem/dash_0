@@ -6,7 +6,7 @@
 /vendor/
 /composer.lock
 /bootstrap/cache/*
-.env
+./.env
 .env.backup
 .phpunit.result.cache
 docker-compose.override.yml
