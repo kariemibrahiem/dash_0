@@ -42,7 +42,7 @@ class CreateModule extends Command
             $this->warn("Model {$modelName} already exists! Skipping creation.");
         } else {
             File::put($modelPath, $this->getModelStub($modelName));
-            $this->info("Model {$modelName} created successfully, upgraded by Kariem developer.");
+            $this->info("Model {$modelName} created successfully, created by Kariem developer. (https://github.com/kariemibrahiem)");
         }
 
 
@@ -63,7 +63,7 @@ class CreateModule extends Command
                 'name' => $migrationName,
                 '--create' => $tableName,
             ]);
-            $this->info("Migration {$migrationName} created successfully, upgraded by Kariem developer.");
+            $this->info("Migration {$migrationName} created successfully, created by Kariem developer. (https://github.com/kariemibrahiem)");
         }
 
 
@@ -75,7 +75,18 @@ class CreateModule extends Command
         } else {
             File::ensureDirectoryExists(app_path('Http/Controllers/Admin'));
             File::put($controllerPath, $this->getControllerStub($modelName, $serviceName));
-            $this->info("Controller {$controllerName} created successfully, upgraded by Kariem developer.");
+            $this->info("Controller {$controllerName} created successfully, created by Kariem developer. (https://github.com/kariemibrahiem)");
+        }
+
+        // create api controller 
+        $apiControllerPath = app_path("Http/Controllers/Api/{$controllerName}Api.php");
+
+        if(File::exists(($apiControllerPath))){
+            $this->warn("Api Controller {$controllerName} already exists! Skipping creation.");
+        }else{
+            File::ensureDirectoryExists(app_path('Http/Controllers/Api'));
+            File::put($apiControllerPath, $this->getControllerStub($modelName, $serviceName));
+            $this->info("Api Controller {$controllerName} created successfully, created by Kariem developer. (https://github.com/kariemibrahiem)");
         }
 
 
@@ -87,7 +98,7 @@ class CreateModule extends Command
         } else {
             File::ensureDirectoryExists(app_path('Services/Admin'));
             File::put($servicePath, $this->getServiceStub($modelName));
-            $this->info("Service {$serviceName} created successfully, upgraded by Kariem developer.");
+            $this->info("Service {$serviceName} created successfully, created by Kariem developer. (https://github.com/kariemibrahiem)");
         }
 
 
@@ -99,7 +110,7 @@ class CreateModule extends Command
         } else {
             File::ensureDirectoryExists(app_path('Http/Requests'));
             File::put($requestPath, $this->getRequestStub($modelName));
-            $this->info("Request {$requestName} created successfully, upgraded by Kariem developer.");
+            $this->info("Request {$requestName} created successfully, created by Kariem developer. (https://github.com/kariemibrahiem)");
         }
 
        // Copy folder name example-module to name new model in views
@@ -111,12 +122,15 @@ class CreateModule extends Command
         } else {
             File::ensureDirectoryExists(resource_path('views/content'));
             File::copyDirectory(resource_path('views/example-module'), $folderPath);
-            $this->info("Folder {$folderName} created successfully, upgraded by Kariem developer.");
+            $this->info("Folder {$folderName} created successfully, created by Kariem developer. (https://github.com/kariemibrahiem)");
         }
 
 
         // Create Routes
         $this->addResourceRoute($modelName, $folderName);
+
+        // Add API routes
+        $this->addApiRoutes($modelName, $folderName);
 
         // Create the enum
         $upper = strtoupper($modelName) . "s";
@@ -134,7 +148,7 @@ class CreateModule extends Command
                 );
 
                 File::put($enumFile, $content);
-                $this->info("Enum case {$upper} added to PermissionEnums, upgraded by Kariem developer.");
+                $this->info("Enum case {$upper} added to PermissionEnums, created by Kariem developer. (https://github.com/kariemibrahiem)");
             } else {
                 $this->warn("Enum case {$upper} already exists! Skipping creation.");
             }
@@ -190,14 +204,14 @@ class CreateModule extends Command
                         $content
                     );
                     File::put($sidebarFile, $content);
-                    $this->info("Sidebar entry for {$slugName} added successfully, upgraded by Kariem developer.");
+                    $this->info("Sidebar entry for {$slugName} added successfully, created by Kariem developer. (https://github.com/kariemibrahiem)");
                 } else {
                     // If array format not found, append to file
                     File::append($sidebarFile, "\n" . $sidebarTag . ",\n");
-                    $this->info("Sidebar object for {$slugName} added successfully, upgraded by Kariem developer.");
+                    $this->info("Sidebar object for {$slugName} added successfully, created by Kariem developer. (https://github.com/kariemibrahiem)");
                 }
             } else {
-                $this->warn("Sidebar for {$slugName} already exists, upgraded by Kariem developer.");
+                $this->warn("Sidebar for {$slugName} already exists, created by Kariem developer. (https://github.com/kariemibrahiem)");
             }
         } else {
             $this->error("Sidebar file not found: {$sidebarFile}");
@@ -282,6 +296,96 @@ class {$modelName}Controller extends Controller
     public function deleteSelected(Request \$request){
         return \$this->objService->deleteSelected(\$request);
     }
+}
+EOT;
+    }
+
+
+    private function getApiControllerStub($modelName, $serviceName)
+    {
+        return <<<EOT
+<?php
+
+namespace App\Http\Controllers\Api;
+
+use App\Http\Controllers\Controller;
+use App\Http\Requests\\{$modelName}Request as ObjRequest;
+use App\Models\\{$modelName} as ObjModel;
+use Illuminate\Http\Request;
+
+class {$modelName}ApiController extends Controller
+{
+    public function __construct(protected ObjModel \$objModel){}
+    public function getData(Request \$request)
+    {
+        try{
+            \$data = \$this->objModel->paginate();
+            return \$this->successResponse(\$data, 200, "تمت العملية بنجاح");
+        }catch(\Exception \$e){
+            return \$this->errorResponse(\$e->getMessage(), 500, "حدث خطأ ما.");
+        }
+    }
+    public function getById(\$id)
+    {
+        try{
+            \$data = \$this->objModel->findOrFail(\$id);
+            return \$this->successResponse(\$data, 200, "تمت العملية بنجاح");
+        }catch(\Exception \$e){
+            return \$this->errorResponse(\$e->getMessage(), 500, "حدث خطأ ما.");
+        }
+    }
+
+    public function store(ObjRequest \$request)
+    {
+        try{
+            \$data = \$request->validated();
+            if (isset(\$data['file'])) {
+                \$data['file'] = \$this->handleFile(\$data['file'], '{$modelName}');
+            }
+            \$obj = \$this->objModel->create(\$data);
+            return \$this->successResponse(\$obj, 201, "تمت العملية بنجاح");
+        }catch(\Exception \$e){
+            return \$this->errorResponse(\$e->getMessage(), 500, "حدث خطأ ما.");
+        }
+    }
+
+    public function update(ObjRequest \$request, \$id)
+    {
+        try{
+            \$data = \$request->validated();
+            \$obj = \$this->objModel->findOrFail(\$id);
+            if (isset(\$data['file'])) {
+                \$data['file'] = \$this->handleFile(\$data['file'], '{$modelName}');
+                if (\$obj->file) {
+                    \$this->deleteFile(\$obj->file);
+                }
+            }
+            \$obj->update(\$data);
+            return \$this->successResponse(\$obj, 200, "تمت العملية بنجاح");
+        }catch(\Exception \$e){
+            return \$this->errorResponse(\$e->getMessage(), 500, "حدث خطأ ما.");
+        }
+    }
+
+    public function destroy(\$id)
+    {
+        try{
+            \$obj = \$this->objModel->findOrFail(\$id);
+            \$obj->delete();
+            return \$this->successResponse([], 204, "تمت العملية بنجاح");
+        }catch(\Exception \$e){
+            return \$this->errorResponse(\$e->getMessage(), 500, "حدث خطأ ما.");
+        }
+    }
+
+    private function successResponse(\$data =[] , \$status = 200, \$message = "تمت العملية بنجاح"){
+        return response()->json(['status' => \$status, 'message' => \$message, 'data' => \$data]);
+    }
+
+    private function errorResponse(\$message = "حدث خطأ ما.", \$status = 500, \$error = null){
+        return response()->json(['status' => \$status, 'message' => \$message, 'error' => \$error]);
+    }
+
 }
 EOT;
     }
@@ -450,6 +554,36 @@ EOT;
     }
 
 
+    private function addApiRoutes($modelName, $folderName){
+        $routeFile = base_path("routes/api.php");
+
+        if(!File::exists($routeFile)){
+            $this->error("The routes/api.php file was not found.");
+            return;
+        }
+
+        $apiRoutes = <<<EOT
+
+        Route::prefix('{$folderName}s')->group(function () {
+            Route::get('get-data', [\\App\\Http\\Controllers\\Api\\{$modelName}ApiController::class, 'getData'])->name('{$folderName}s.index');
+            Route::get('/{id}', [\\App\\Http\\Controllers\\Api\\{$modelName}ApiController::class, 'getById'])->name('{$folderName}s.show');
+            Route::post('/', [\\App\\Http\\Controllers\\Api\\{$modelName}ApiController::class, 'store'])->name('{$folderName}s.store');
+            Route::put('/{id}', [\\App\\Http\\Controllers\\Api\\{$modelName}ApiController::class, 'update'])->name('{$folderName}s.update');
+            Route::delete('/{id}', [\\App\\Http\\Controllers\\Api\\{$modelName}ApiController::class, 'destroy'])->name('{$folderName}s.destroy');
+        });
+        EOT;
+
+        $fileContent = File::get($routeFile);
+
+        if (Str::contains($fileContent, "{$folderName}s")) {
+            $this->warn("API routes for '{$folderName}s' already exist! Skipping creation.");
+            return;
+        }
+
+        File::append($routeFile, "\n" . $apiRoutes . "\n");
+        $this->info("API routes for '{$folderName}s' added successfully , created by Kariem developer. (https://github.com/kariemibrahiem)");
+    }
+
     private function addResourceRoute($modelName, $folderName)
     {
         $routeFile = base_path('routes/web.php');
@@ -482,7 +616,7 @@ EOT;
             $fileContent = preg_replace($searchPattern, $updatedGroup, $fileContent);
 
             File::put($routeFile, $fileContent);
-            $this->info("Resource route + updateColumnSelected for '{$folderName}s' added inside auth:admin group successfully.");
+            $this->info("Resource route + updateColumnSelected for '{$folderName}s' added inside auth:admin group successfully , created by Kariem developer. (https://github.com/kariemibrahiem)");
         } else {
             $this->error("Could not find auth:admin group in routes/web.php");
         }
