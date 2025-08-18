@@ -52,6 +52,15 @@ $navbarDetached = ($navbarDetached ?? '');
 
     <ul class="navbar-nav flex-row align-items-center ms-auto">
 
+      <li class="nav-item dropdown ms-2">
+        <div class="position-relative  d-inline-block" style="cursor: pointer">
+          <i class="fa fa-bell fa-lg"></i>
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+            0
+          </span>
+        </div>
+
+      </li>
       <!-- Language dropdown -->
       <li class="nav-item dropdown ms-2">
         <a class="nav-link dropdown-toggle btn btn-sm btn-light py-1" href="#" id="langDropdown"

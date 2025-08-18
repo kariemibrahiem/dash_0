@@ -22,6 +22,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post("login" , [AuthController::class, "login"]);
+Route::post("user-regist" , [AuthController::class, "regist"]);
+Route::post("user-otp" , [AuthController::class, "otpCheck"]);
+
 Route::group(["middleware" => "auth:sanctum"] , function(){
     Route::get("user-getDate" , [UserController::class, "getDate"]);
     Route::post("user-create" , [UserController::class, "createUser"]);

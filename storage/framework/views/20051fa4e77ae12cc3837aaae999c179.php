@@ -88,6 +88,15 @@ $container = ($container ?? 'container-xxl');
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
 
+  <script src="https://js.pusher.com/8.4.0/pusher.min.js"></script>
+<script>
+  Pusher.logToConsole = true;
+
+  var pusher = new Pusher('047a5c12cb292412244f', {
+    cluster: 'eu'
+  });
+
+</script>
 
 <!-- swit alert for alert -->
 
