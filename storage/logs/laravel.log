@@ -15551,3 +15551,26 @@ Stack trace:
 [stacktrace]
 #0 {main}
 "} 
+[2025-08-18 06:28:29] local.ERROR: syntax error, unexpected identifier "ApiPath" {"exception":"[object] (ParseError(code: 0): syntax error, unexpected identifier \"ApiPath\" at /home/kariem/Desktop/Projects/dash_0/app/Console/Commands/CreateModule.php:82)
+[stacktrace]
+#0 /home/kariem/Desktop/Projects/dash_0/vendor/composer/ClassLoader.php(427): Composer\\Autoload\\{closure}()
+#1 [internal function]: Composer\\Autoload\\ClassLoader->loadClass()
+#2 /home/kariem/Desktop/Projects/dash_0/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(346): is_subclass_of()
+#3 /home/kariem/Desktop/Projects/dash_0/app/Console/Kernel.php(23): Illuminate\\Foundation\\Console\\Kernel->load()
+#4 /home/kariem/Desktop/Projects/dash_0/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(453): App\\Console\\Kernel->commands()
+#5 /home/kariem/Desktop/Projects/dash_0/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(199): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#6 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle()
+#7 {main}
+"} 
+[2025-08-18 11:13:27] local.ERROR: Uncaught Error: Class "App\Models\BaseModel" not found in /home/kariem/Desktop/Projects/dash_0/app/Models/Test.php:5
+Stack trace:
+#0 Command line code(1): include_once()
+#1 {main}
+  thrown {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Uncaught Error: Class \"App\\Models\\BaseModel\" not found in /home/kariem/Desktop/Projects/dash_0/app/Models/Test.php:5
+Stack trace:
+#0 Command line code(1): include_once()
+#1 {main}
+  thrown at /home/kariem/Desktop/Projects/dash_0/app/Models/Test.php:5)
+[stacktrace]
+#0 {main}
+"} 
