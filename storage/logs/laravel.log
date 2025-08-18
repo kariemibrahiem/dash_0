@@ -15515,3 +15515,39 @@ Stack trace:
 [stacktrace]
 #0 {main}
 "} 
+[2025-08-17 06:50:52] local.ERROR: Uncaught Error: Class "App\Models\BaseModel" not found in /home/kariem/Desktop/Projects/dash_0/app/Models/Test.php:5
+Stack trace:
+#0 Command line code(1): include_once()
+#1 {main}
+  thrown {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Uncaught Error: Class \"App\\Models\\BaseModel\" not found in /home/kariem/Desktop/Projects/dash_0/app/Models/Test.php:5
+Stack trace:
+#0 Command line code(1): include_once()
+#1 {main}
+  thrown at /home/kariem/Desktop/Projects/dash_0/app/Models/Test.php:5)
+[stacktrace]
+#0 {main}
+"} 
+[2025-08-17 13:01:10] local.ERROR: Uncaught Error: Class "App\Models\BaseModel" not found in /home/kariem/Desktop/Projects/dash_0/app/Models/Test.php:5
+Stack trace:
+#0 Command line code(1): include_once()
+#1 {main}
+  thrown {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Uncaught Error: Class \"App\\Models\\BaseModel\" not found in /home/kariem/Desktop/Projects/dash_0/app/Models/Test.php:5
+Stack trace:
+#0 Command line code(1): include_once()
+#1 {main}
+  thrown at /home/kariem/Desktop/Projects/dash_0/app/Models/Test.php:5)
+[stacktrace]
+#0 {main}
+"} 
+[2025-08-18 06:08:32] local.ERROR: Uncaught Error: Class "App\Models\BaseModel" not found in /home/kariem/Desktop/Projects/dash_0/app/Models/Test.php:5
+Stack trace:
+#0 Command line code(1): include_once()
+#1 {main}
+  thrown {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Uncaught Error: Class \"App\\Models\\BaseModel\" not found in /home/kariem/Desktop/Projects/dash_0/app/Models/Test.php:5
+Stack trace:
+#0 Command line code(1): include_once()
+#1 {main}
+  thrown at /home/kariem/Desktop/Projects/dash_0/app/Models/Test.php:5)
+[stacktrace]
+#0 {main}
+"} 
