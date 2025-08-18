@@ -43,7 +43,6 @@
                 <!-- <img src="<?php echo e(asset('assets/img/icons/unicons/chart-success.png')); ?>" alt="chart success" class="rounded"> -->
                  <i class="bx bx-group text-primary" style="font-size: 1.75rem;"></i>
 
-
               </div>
               <div class="dropdown">
                 <button class="btn p-0" type="button" id="cardOpt3" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
