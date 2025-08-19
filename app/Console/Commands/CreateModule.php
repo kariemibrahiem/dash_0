@@ -5,223 +5,277 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
+
 class CreateModule extends Command
 {
-     /**
+    /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    //test
-    protected $signature = 'make:module {name}';
+    protected $signature = 'make:module {name} {--api}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Create model, controller, service, and request for an entity';
+    protected $description = 'Create model, controller, service , api , sidebar , permission, and request for an entity';
 
-    /**
-     * Execute the console command.
-     */
     public function handle()
     {
-        $enumFile = app_path('Enums/PermissionEnums.php');
-        $name = $this->argument('name');
-        $namespace = 'App';
-        $modelName = Str::studly($name);
+        $enumFile    = app_path("Enums/PermissionEnums.php");
+        $name        = $this->argument('name');
+        $isApi       = $this->option('api');
+        $modelName   = Str::studly($name);
         $serviceName = "{$modelName}Service";
-        $controllerName = "{$modelName}Controller";
+        $controller  = "{$modelName}Controller";
         $requestName = "{$modelName}Request";
+        $folderName  = strtolower(Str::snake($modelName));
 
-        // Create Model
-        $modelPath = app_path("Models/{$modelName}.php");
-
-        if (File::exists($modelPath)) {
-            $this->warn("Model {$modelName} already exists! Skipping creation.");
+        if (!$isApi) {
+            $this->createModel($modelName);
+            $this->createMigration($name, $modelName);
+            $this->createController($modelName, $serviceName);
+            $this->createService($modelName);
+            $this->createRequest($modelName);
+            $this->createViews($modelName, $folderName);
+            $this->addResourceRoute($modelName, $folderName);
+            $this->updatePermissionEnum($modelName, $enumFile);
+            $this->updateSidebar($modelName, $folderName);
+            $this->createApiController($modelName, $serviceName, $controller);
+            $this->addApiRoutes($modelName, $folderName);
         } else {
-            File::put($modelPath, $this->getModelStub($modelName));
-            $this->info("Model {$modelName} created successfully, created by Kariem developer. (https://github.com/kariemibrahiem)");
+            $this->createApiController($modelName, $serviceName, $controller);
+            $this->addApiRoutes($modelName, $folderName);
+        }
+    }
+
+    private function createModel($modelName)
+    {
+        $path = app_path("Models/{$modelName}.php");
+
+        if (File::exists($path)) {
+            $this->warn("Model {$modelName} already exists! Skipping creation.");
+            return;
         }
 
+        File::put($path, $this->getModelStub($modelName));
+        $this->info("Model {$modelName} created successfully, created by Kariem developer. (https://github.com/kariemibrahiem)");
+    }
 
-        // Create Migration
-        $tableName = Str::snake(Str::pluralStudly($name));
+    private function createMigration($name, $modelName)
+    {
+        $tableName     = Str::snake(Str::pluralStudly($name));
         $migrationName = "create_{$tableName}_table";
 
-        // Check if a migration for this table already exists
-        $existingMigration = collect(File::files(database_path('migrations')))
-            ->contains(function ($file) use ($migrationName) {
-                return Str::contains($file->getFilename(), $migrationName);
-            });
+        $exists = collect(File::files(database_path('migrations')))
+            ->contains(fn($file) => Str::contains($file->getFilename(), $migrationName));
 
-        if ($existingMigration) {
+        if ($exists) {
             $this->warn("Migration for table '{$tableName}' already exists! Skipping creation.");
-        } else {
-            $this->call('make:migration', [
-                'name' => $migrationName,
-                '--create' => $tableName,
-            ]);
-            $this->info("Migration {$migrationName} created successfully, created by Kariem developer. (https://github.com/kariemibrahiem)");
+            return;
         }
 
+        $this->call('make:migration', ['name' => $migrationName, '--create' => $tableName]);
+        $this->info("Migration {$migrationName} created successfully, created by Kariem developer. (https://github.com/kariemibrahiem)");
+    }
 
-        // Create Controller
-        $controllerPath = app_path("Http/Controllers/Admin/{$controllerName}.php");
+    private function createController($modelName, $serviceName)
+    {
+        $path = app_path("Http/Controllers/Admin/{$modelName}Controller.php");
 
-        if (File::exists($controllerPath)) {
-            $this->warn("Controller {$controllerName} already exists! Skipping creation.");
-        } else {
-            File::ensureDirectoryExists(app_path('Http/Controllers/Admin'));
-            File::put($controllerPath, $this->getControllerStub($modelName, $serviceName));
-            $this->info("Controller {$controllerName} created successfully, created by Kariem developer. (https://github.com/kariemibrahiem)");
+        if (File::exists($path)) {
+            $this->warn("Controller {$modelName} already exists! Skipping creation.");
+            return;
         }
 
-        // create api controller 
-        $apiControllerPath = app_path("Http/Controllers/Api/{$controllerName}Api.php");
+        File::ensureDirectoryExists(app_path('Http/Controllers/Admin'));
+        File::put($path, $this->getControllerStub($modelName, $serviceName));
+        $this->info("Controller {$modelName} created successfully, created by Kariem developer. (https://github.com/kariemibrahiem)");
+    }
 
-        if(File::exists(($apiControllerPath))){
-            $this->warn("Api Controller {$controllerName} already exists! Skipping creation.");
-        }else{
-            File::ensureDirectoryExists(app_path('Http/Controllers/Api'));
-            File::put($apiControllerPath, $this->getControllerStub($modelName, $serviceName));
-            $this->info("Api Controller {$controllerName} created successfully, created by Kariem developer. (https://github.com/kariemibrahiem)");
-        }
+    private function createService($modelName)
+    {
+        $serviceName = "{$modelName}Service";
+        $path        = app_path("Services/Admin/{$serviceName}.php");
 
-
-        // Create Service
-        $servicePath = app_path("Services/Admin/{$serviceName}.php");
-
-        if (File::exists($servicePath)) {
+        if (File::exists($path)) {
             $this->warn("Service {$serviceName} already exists! Skipping creation.");
-        } else {
-            File::ensureDirectoryExists(app_path('Services/Admin'));
-            File::put($servicePath, $this->getServiceStub($modelName));
-            $this->info("Service {$serviceName} created successfully, created by Kariem developer. (https://github.com/kariemibrahiem)");
+            return;
         }
 
+        File::ensureDirectoryExists(app_path('Services/Admin'));
+        File::put($path, $this->getServiceStub($modelName));
+        $this->info("Service {$serviceName} created successfully, created by Kariem developer. (https://github.com/kariemibrahiem)");
+    }
 
-        // Create Request
-        $requestPath = app_path("Http/Requests/{$requestName}.php");
+    private function createRequest($modelName)
+    {
+        $requestName = "{$modelName}Request";
+        $path        = app_path("Http/Requests/{$requestName}.php");
 
-        if (File::exists($requestPath)) {
+        if (File::exists($path)) {
             $this->warn("Request {$requestName} already exists! Skipping creation.");
-        } else {
-            File::ensureDirectoryExists(app_path('Http/Requests'));
-            File::put($requestPath, $this->getRequestStub($modelName));
-            $this->info("Request {$requestName} created successfully, created by Kariem developer. (https://github.com/kariemibrahiem)");
+            return;
         }
 
-       // Copy folder name example-module to name new model in views
-        $folderName = strtolower(Str::snake($modelName)); 
+        File::ensureDirectoryExists(app_path('Http/Requests'));
+        File::put($path, $this->getRequestStub($modelName));
+        $this->info("Request {$requestName} created successfully, created by Kariem developer. (https://github.com/kariemibrahiem)");
+    }
+
+    private function createViews($modelName, $folderName)
+    {
         $folderPath = resource_path("views/content/{$folderName}");
 
         if (File::exists($folderPath)) {
             $this->warn("Folder {$folderName} already exists! Skipping creation.");
-        } else {
-            File::ensureDirectoryExists(resource_path('views/content'));
-            File::copyDirectory(resource_path('views/example-module'), $folderPath);
-            $this->info("Folder {$folderName} created successfully, created by Kariem developer. (https://github.com/kariemibrahiem)");
+            return;
         }
 
+        File::ensureDirectoryExists(resource_path('views/content'));
+        File::copyDirectory(resource_path('views/example-module'), $folderPath);
+        $this->info("Folder {$folderName} created successfully, created by Kariem developer. (https://github.com/kariemibrahiem)");
+    }
 
-        // Create Routes
-        $this->addResourceRoute($modelName, $folderName);
-
-        // Add API routes
-        $this->addApiRoutes($modelName, $folderName);
-
-        // Create the enum
+    private function updatePermissionEnum($modelName, $enumFile)
+    {
         $upper = strtoupper($modelName) . "s";
         $lower = strtolower($modelName) . "s";
         $newLine = "    case {$upper} = \"{$lower}\";" . PHP_EOL;
 
-        if (File::exists($enumFile)) {
-            $content = File::get($enumFile);
-
-            if (!str_contains($content, "case {$upper} = \"{$lower}\";")) {
-                $content = preg_replace(
-                    '/(\n\s*public function label\(\): string)/',
-                    PHP_EOL . $newLine . '$1',
-                    $content
-                );
-
-                File::put($enumFile, $content);
-                $this->info("Enum case {$upper} added to PermissionEnums, created by Kariem developer. (https://github.com/kariemibrahiem)");
-            } else {
-                $this->warn("Enum case {$upper} already exists! Skipping creation.");
-            }
-        } else {
+        if (!File::exists($enumFile)) {
             $this->error("PermissionEnums.php not found.");
+            return;
         }
 
+        $content = File::get($enumFile);
 
-        // create the sidebar tag
+        if (str_contains($content, "case {$upper} = \"{$lower}\";")) {
+            $this->warn("Enum case {$upper} already exists! Skipping creation.");
+            return;
+        }
+
+        $content = preg_replace(
+            '/(\n\s*public function label\(\): string)/',
+            PHP_EOL . $newLine . '$1',
+            $content
+        );
+
+        File::put($enumFile, $content);
+        $this->info("Enum case {$upper} added to PermissionEnums, created by Kariem developer. (https://github.com/kariemibrahiem)");
+    }
+
+    private function updateSidebar($modelName, $folderName)
+    {
         $sidebarFile = resource_path("views/layouts/sections/menu/verticalMenu.php");
 
-        $labelName = Str::headline($modelName);
+        if (!File::exists($sidebarFile)) {
+            $this->error("Sidebar file not found: {$sidebarFile}");
+            return;
+        }
+
         $slugName  = Str::snake(Str::pluralStudly($modelName));
+        $labelName = Str::headline($modelName);
         $menuHeader = Str::headline($modelName) . " Management";
 
         $sidebarTag = <<<PHP
-        (object)[
-            'menuHeader' => '{$menuHeader}',
-        ],
-        (object)[
-            'name' => '{$labelName}',
-            'icon' => 'bx bx-user',
-            'url' => '{$slugName}.index',
-            "permissions" => "{$slugName}_read",
-            'slug' => '{$slugName}',
-            'submenu' => [
-                (object)[
-                    'name' => 'All {$labelName}',
-                    'url' => '{$slugName}',
-                    "permissions" => "{$slugName}_read",
-                    'slug' => '{$slugName}',
-                ],
-                (object)[
-                    'name' => 'Create {$modelName}',
-                    'url' => '{$slugName}/create',
-                    "permissions" => "{$slugName}_create",
-                    'slug' => '{$slugName}.create',
+            (object)[
+                'menuHeader' => '{$menuHeader}',
+            ],
+            (object)[
+                'name' => '{$labelName}',
+                'icon' => 'bx bx-user',
+                'url' => '{$slugName}.index',
+                "permissions" => "{$slugName}_read",
+                'slug' => '{$slugName}',
+                'submenu' => [
+                    (object)[
+                        'name' => 'All {$labelName}',
+                        'url' => '{$slugName}',
+                        "permissions" => "{$slugName}_read",
+                        'slug' => '{$slugName}',
+                    ],
+                    (object)[
+                        'name' => 'Create {$modelName}',
+                        'url' => '{$slugName}/create',
+                        "permissions" => "{$slugName}_create",
+                        'slug' => '{$slugName}.create',
+                    ]
                 ]
             ]
-        ]
         PHP;
 
-        if (File::exists($sidebarFile)) {
-            $content = File::get($sidebarFile);
+        $content = File::get($sidebarFile);
 
-            // Check if already exists
-            if (!Str::contains($content, "'slug' => '{$slugName}'")) {
-                // Try to insert before the closing array bracket
-                if (preg_match('/return\s*\[.*\];/s', $content)) {
-                    $content = preg_replace(
-                        '/(\];\s*)$/',
-                        ",\n    {$sidebarTag}\n]$1",
-                        $content
-                    );
-                    File::put($sidebarFile, $content);
-                    $this->info("Sidebar entry for {$slugName} added successfully, created by Kariem developer. (https://github.com/kariemibrahiem)");
-                } else {
-                    // If array format not found, append to file
-                    File::append($sidebarFile, "\n" . $sidebarTag . ",\n");
-                    $this->info("Sidebar object for {$slugName} added successfully, created by Kariem developer. (https://github.com/kariemibrahiem)");
-                }
-            } else {
-                $this->warn("Sidebar for {$slugName} already exists, created by Kariem developer. (https://github.com/kariemibrahiem)");
-            }
+        if (Str::contains($content, "'slug' => '{$slugName}'")) {
+            $this->warn("Sidebar for {$slugName} already exists, created by Kariem developer. (https://github.com/kariemibrahiem)");
+            return;
+        }
+
+        if (preg_match('/return\s*\[.*\];/s', $content)) {
+            $content = preg_replace(
+                '/(\];\s*)$/',
+                ",\n    {$sidebarTag}\n]$1",
+                $content
+            );
+            File::put($sidebarFile, $content);
+            $this->info("Sidebar entry for {$slugName} added successfully, created by Kariem developer. (https://github.com/kariemibrahiem)");
         } else {
-            $this->error("Sidebar file not found: {$sidebarFile}");
+            File::append($sidebarFile, "\n" . $sidebarTag . ",\n");
+            $this->info("Sidebar object for {$slugName} added successfully, created by Kariem developer. (https://github.com/kariemibrahiem)");
+        }
+    }
+
+    private function createApiController($modelName, $serviceName, $controllerName)
+    {
+        $path = app_path("Http/Controllers/Api/V1/{$modelName}ApiController.php");
+
+        if (File::exists($path)) {
+            $this->warn("Api Controller {$controllerName} already exists! Skipping creation.");
+            return;
         }
 
+        File::ensureDirectoryExists(app_path('Http/Controllers/Api/V1'));
+        File::put($path, $this->getApiControllerStub($modelName, $serviceName));
+        $this->info("Api Controller {$controllerName} created successfully, created by Kariem developer. (https://github.com/kariemibrahiem)");
+    }
 
-        
+    private function addApiRoutes($modelName, $folderName)
+    {
+        $routeFile = base_path("routes/api.php");
+
+        if (!File::exists($routeFile)) {
+            $this->error("The routes/api.php file was not found.");
+            return;
         }
 
-        
+        $apiRoutes = <<<EOT
+
+        Route::prefix('{$folderName}s')->group(function () {
+            Route::get('get-data', [\\App\\Http\\Controllers\\Api\\V1\\{$modelName}ApiController::class, 'getData'])->name('{$folderName}s.index');
+            Route::get('/{id}', [\\App\\Http\\Controllers\\Api\\V1\\{$modelName}ApiController::class, 'getById'])->name('{$folderName}s.show');
+            Route::post('/', [\\App\\Http\\Controllers\\Api\\V1\\{$modelName}ApiController::class, 'store'])->name('{$folderName}s.store');
+            Route::put('/{id}', [\\App\\Http\\Controllers\\Api\\V1\\{$modelName}ApiController::class, 'update'])->name('{$folderName}s.update');
+            Route::delete('/{id}', [\\App\\Http\\Controllers\\Api\\V1\\{$modelName}ApiController::class, 'destroy'])->name('{$folderName}s.destroy');
+        });
+        EOT;
+
+        $fileContent = File::get($routeFile);
+
+        if (Str::contains($fileContent, "{$folderName}s")) {
+            $this->warn("API routes for '{$folderName}s' already exist! Skipping creation.");
+            return;
+        }
+
+        File::append($routeFile, "\n" . $apiRoutes . "\n");
+        $this->info("API routes for '{$folderName}s' added successfully , created by Kariem developer. (https://github.com/kariemibrahiem)");
+    }
+
+    // ========================
+    // Stubs
+    // ========================
 
     private function getModelStub($modelName)
     {
@@ -230,12 +284,16 @@ class CreateModule extends Command
 
 namespace App\Models;
 
-class {$modelName} extends BaseModel
-{
-    protected \$fillable = [];
-    protected \$casts = [];
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
+class {$modelName} extends Model
+{
+    use HasFactory;
+
+    protected \$guarded = [];
 }
+
 EOT;
     }
 
@@ -306,7 +364,7 @@ EOT;
         return <<<EOT
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\\{$modelName}Request as ObjRequest;
@@ -316,7 +374,7 @@ use Illuminate\Http\Request;
 class {$modelName}ApiController extends Controller
 {
     public function __construct(protected ObjModel \$objModel){}
-    public function getData(Request \$request)
+    public function getData()
     {
         try{
             \$data = \$this->objModel->paginate();
@@ -554,35 +612,7 @@ EOT;
     }
 
 
-    private function addApiRoutes($modelName, $folderName){
-        $routeFile = base_path("routes/api.php");
-
-        if(!File::exists($routeFile)){
-            $this->error("The routes/api.php file was not found.");
-            return;
-        }
-
-        $apiRoutes = <<<EOT
-
-        Route::prefix('{$folderName}s')->group(function () {
-            Route::get('get-data', [\\App\\Http\\Controllers\\Api\\{$modelName}ApiController::class, 'getData'])->name('{$folderName}s.index');
-            Route::get('/{id}', [\\App\\Http\\Controllers\\Api\\{$modelName}ApiController::class, 'getById'])->name('{$folderName}s.show');
-            Route::post('/', [\\App\\Http\\Controllers\\Api\\{$modelName}ApiController::class, 'store'])->name('{$folderName}s.store');
-            Route::put('/{id}', [\\App\\Http\\Controllers\\Api\\{$modelName}ApiController::class, 'update'])->name('{$folderName}s.update');
-            Route::delete('/{id}', [\\App\\Http\\Controllers\\Api\\{$modelName}ApiController::class, 'destroy'])->name('{$folderName}s.destroy');
-        });
-        EOT;
-
-        $fileContent = File::get($routeFile);
-
-        if (Str::contains($fileContent, "{$folderName}s")) {
-            $this->warn("API routes for '{$folderName}s' already exist! Skipping creation.");
-            return;
-        }
-
-        File::append($routeFile, "\n" . $apiRoutes . "\n");
-        $this->info("API routes for '{$folderName}s' added successfully , created by Kariem developer. (https://github.com/kariemibrahiem)");
-    }
+    
 
     private function addResourceRoute($modelName, $folderName)
     {
