@@ -130,3 +130,47 @@ Stack trace:
 [stacktrace]
 #0 {main}
 "} 
+[2025-08-18 19:40:43] local.ERROR: Uncaught Error: Class "App\Models\BaseModel" not found in D:\projects\dash_0\app\Models\Test.php:5
+Stack trace:
+#0 D:\projects\dash_0\vendor\composer\ClassLoader.php(576): include()
+#1 D:\projects\dash_0\vendor\composer\ClassLoader.php(427): Composer\Autoload\{closure}('D:\\projects\\das...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('App\\Models\\Test')
+#3 Command line code(1): class_exists('App\\Models\\Test')
+#4 [internal function]: {closure}('App\\Models\\Test')
+#5 Command line code(1): array_filter(Array, Object(Closure))
+#6 {main}
+  thrown {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Uncaught Error: Class \"App\\Models\\BaseModel\" not found in D:\\projects\\dash_0\\app\\Models\\Test.php:5
+Stack trace:
+#0 D:\\projects\\dash_0\\vendor\\composer\\ClassLoader.php(576): include()
+#1 D:\\projects\\dash_0\\vendor\\composer\\ClassLoader.php(427): Composer\\Autoload\\{closure}('D:\\\\projects\\\\das...')
+#2 [internal function]: Composer\\Autoload\\ClassLoader->loadClass('App\\\\Models\\\\Test')
+#3 Command line code(1): class_exists('App\\\\Models\\\\Test')
+#4 [internal function]: {closure}('App\\\\Models\\\\Test')
+#5 Command line code(1): array_filter(Array, Object(Closure))
+#6 {main}
+  thrown at D:\\projects\\dash_0\\app\\Models\\Test.php:5)
+[stacktrace]
+#0 {main}
+"} 
+[2025-08-18 19:41:43] local.ERROR: Uncaught Error: Class "App\Models\BaseModel" not found in D:\projects\dash_0\app\Models\Test.php:5
+Stack trace:
+#0 D:\projects\dash_0\vendor\composer\ClassLoader.php(576): include()
+#1 D:\projects\dash_0\vendor\composer\ClassLoader.php(427): Composer\Autoload\{closure}('D:\\projects\\das...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('App\\Models\\Test')
+#3 Command line code(1): class_exists('App\\Models\\Test')
+#4 [internal function]: {closure}('App\\Models\\Test')
+#5 Command line code(1): array_filter(Array, Object(Closure))
+#6 {main}
+  thrown {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Uncaught Error: Class \"App\\Models\\BaseModel\" not found in D:\\projects\\dash_0\\app\\Models\\Test.php:5
+Stack trace:
+#0 D:\\projects\\dash_0\\vendor\\composer\\ClassLoader.php(576): include()
+#1 D:\\projects\\dash_0\\vendor\\composer\\ClassLoader.php(427): Composer\\Autoload\\{closure}('D:\\\\projects\\\\das...')
+#2 [internal function]: Composer\\Autoload\\ClassLoader->loadClass('App\\\\Models\\\\Test')
+#3 Command line code(1): class_exists('App\\\\Models\\\\Test')
+#4 [internal function]: {closure}('App\\\\Models\\\\Test')
+#5 Command line code(1): array_filter(Array, Object(Closure))
+#6 {main}
+  thrown at D:\\projects\\dash_0\\app\\Models\\Test.php:5)
+[stacktrace]
+#0 {main}
+"} 
