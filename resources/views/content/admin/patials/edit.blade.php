@@ -8,6 +8,15 @@
     <a href="{{ route('users.index') }}">{{ trns('Users') }}</a> /
   </span> {{ trns('Edit Admin') }}
 </h4>
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul class="mb-0">
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 <div class="card">
   <div class="card-body">
     <form action="{{ route('admins.update', $obj->id) }}" method="POST" enctype="multipart/form-data">
