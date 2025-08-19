@@ -45,7 +45,7 @@ use App\Http\Controllers\Admin\form_layouts\VerticalForm;
 use App\Http\Controllers\Admin\form_layouts\HorizontalForm;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\Admin\tables\Basic as TablesBasic;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\Admin\UserController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 // Main Page Route
@@ -62,6 +62,10 @@ Route::group(["middleware" => "auth:admin"], function(){
     Route::resource('admins', \App\Http\Controllers\Admin\AdminController::class);
     Route::post('/admins/updateColumnSelected', [\App\Http\Controllers\Admin\AdminController::class, 'updateColumnSelected'])->name('admins.updateColumnSelected');
 
+
+    Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
+    Route::post('/users/updateColumnSelected', [\App\Http\Controllers\Admin\UserController::class, 'updateColumnSelected'])
+        ->name('users.updateColumnSelected');
 });
 Route::post("reset-password", [ForgotPasswordController::class, 'resetPassword'])->name("reset-password");
 

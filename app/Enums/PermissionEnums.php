@@ -8,6 +8,9 @@ enum PermissionEnums: string
     case Role = 'role';
     case Permission = 'permission';
     case ADMINs = "admins";
+    case USERs = "users";
+
+
 
 
 
