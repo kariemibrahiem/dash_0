@@ -1361,4 +1361,7 @@ Stack Trace:
   'OTP Verification' => 'OTP Verification',
   'Password reset successfully. Please log in with your new password.' => 'Password Reset Successfully. Please Log In With Your New Password.',
   'error in login field' => 'Error In Login Field',
+  'All Admins' => 'All Admins',
+  'Create User' => 'Create User',
+  'All Users' => 'All Users',
 );

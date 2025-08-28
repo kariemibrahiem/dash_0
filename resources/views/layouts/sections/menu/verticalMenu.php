@@ -8,7 +8,6 @@ return [
         "permissions" => "dashboard",
         'slug' => 'dashboard',
     ],
-
     (object)[
         'menuHeader' => 'User Management',
     ],
@@ -33,7 +32,6 @@ return [
             ]
         ]
     ],
-
     (object)[
         'menuHeader' => 'Admin Management',
     ],
