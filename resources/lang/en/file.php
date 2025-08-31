@@ -1364,4 +1364,6 @@ Stack Trace:
   'All Admins' => 'All Admins',
   'Create User' => 'Create User',
   'All Users' => 'All Users',
+  'the temp today is : ' => 'The Temp Today Is : ',
+  'the wind_speed today is : ' => 'The Wind Speed Today Is : ',
 );

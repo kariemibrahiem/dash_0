@@ -21,10 +21,49 @@
       <div class="d-flex align-items-end row">
         <div class="col-sm-7">
           <div class="card-body">
-            <h5 class="card-title text-primary">welcome : {{  $userProvider->user_name }} ❤️</h5>
-            <p class="mb-4">You have done <span class="fw-medium">72%</span> more sales today. Check your new badge in your profile.</p>
+                        <div class="card-body bg-light rounded-3 shadow-sm p-4">
+                <h5 class="card-title text-primary fw-bold mb-4">
+                    👋 {{ __('Welcome') }} : {{ $userProvider->user_name }} ❤️
+                </h5>
 
-            <a href="javascript:;" class="btn btn-sm btn-outline-primary">View Badges</a>
+                <!-- Temperature -->
+                <div class="mb-3 d-flex align-items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="orange" class="me-2" viewBox="0 0 16 16">
+                        <path d="M8 4.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7z"/>
+                        <path d="M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zM8 13.5a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2a.5.5 0 0 1 .5-.5zM16 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 16 8zM2.5 8a.5.5 0 0 1-.5.5H0a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5z"/>
+                    </svg>
+                    <span class="fw-semibold text-warning">{{ __('Temperature:') }}</span>
+                    <span class="ms-2 text-dark">{{ $data['temp'] }} °C</span>
+                </div>
+
+                <!-- Pressure -->
+                <div class="mb-3 d-flex align-items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="red" class="me-2" viewBox="0 0 16 16">
+                        <path d="M8 3a5 5 0 1 0 0 10A5 5 0 0 0 8 3zm0 1a4 4 0 0 1 4 4c0 .82-.25 1.58-.68 2.21l-2.5-2.5a.5.5 0 0 0-.71.71l2.5 2.5A3.98 3.98 0 0 1 8 12a4 4 0 1 1 0-8z"/>
+                    </svg>
+                    <span class="fw-semibold text-danger">{{ __('Pressure:') }}</span>
+                    <span class="ms-2 text-dark">{{ $data['pressure'] }} hPa</span>
+                </div>
+
+                <!-- Humidity -->
+                <div class="mb-3 d-flex align-items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="blue" class="me-2" viewBox="0 0 16 16">
+                        <path d="M8 0C5 4 2 7 2 10a6 6 0 1 0 12 0c0-3-3-6-6-10zM4 10a4 4 0 0 1 8 0A4 4 0 0 1 4 10z"/>
+                    </svg>
+                    <span class="fw-semibold text-info">{{ __('Humidity:') }}</span>
+                    <span class="ms-2 text-dark">{{ $data['humidity'] }} %</span>
+                </div>
+
+                <!-- Wind Speed -->
+                <div class="mb-3 d-flex align-items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="teal" class="me-2" viewBox="0 0 16 16">
+                        <path d="M8.5 2A1.5 1.5 0 1 1 10 3.5H1a.5.5 0 0 0 0 1h9A2.5 2.5 0 1 0 7.5 2h1zM13 6a2 2 0 1 1-2 2H1a.5.5 0 0 0 0 1h10a3 3 0 1 0 2-3zM6 10a2 2 0 1 1-2 2H1a.5.5 0 0 0 0 1h3a3 3 0 1 0 2-3z"/>
+                    </svg>
+                    <span class="fw-semibold text-success">{{ __('Wind Speed:') }}</span>
+                    <span class="ms-2 text-dark">{{ $data['wind_speed'] }} km/h</span>
+                </div>
+            </div>
+
           </div>
         </div>
         <div class="col-sm-5 text-center text-sm-left">
