@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string("otp");
             $table->timestamp('verified_at')->nullable();
-            $table->timestamp("exp_date");
+            $table->timestamp("exp_date")->nullable();
             $table->timestamps();
         });
     }
