@@ -34,11 +34,12 @@ return [
         ]
     ],
 
+
     (object)[
         'menuHeader' => 'Admin Management',
     ],
     (object)[
-        'name' => 'Admin',
+        'name' => 'Admins',
         'icon' => 'bx bx-user',
         'url' => 'admins.index',
         "permissions" => "admins_read",
@@ -57,5 +58,8 @@ return [
                 'slug' => 'admins.create',
             ]
         ]
-    ]
+    ],
+
+
+
 ];
