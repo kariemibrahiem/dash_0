@@ -1,0 +1,199 @@
+/* demo-rtl.css */
+/* RTL adjustments for Arabic */
+
+/* تحويل الاتجاه للنصوص في الصفحة */
+body, html, .layout-wrapper {
+    direction: rtl !important;
+    text-align: right !important;
+    height: 100%;
+    margin: 0;
+}
+
+/* App brand */
+.menu .app-brand.demo {
+    float: right;
+    margin-left: 0;
+    margin-right: 12px;
+}
+#navbar-collapse {
+  max-height: 75vh;
+  overflow-y: auto;
+  direction: rtl !important; /* لضمان التمرير الصحيح في RTL */
+}
+
+/* Logo adjustments */
+.app-brand-logo.demo svg {
+    transform: scaleX(-1); /* لعكس أي شعارات موجهة للـ LTR */
+}
+
+/* RTL-only elements */
+.rtl-only {
+    display: block !important;
+    text-align: right !important;
+    direction: rtl !important;
+}
+
+/* Overrides for demo spacing classes */
+.demo-inline-spacing > * {
+    margin: 1rem 0 0 0.375rem !important; /* عكس margin */
+}
+
+.demo-vertical-spacing > * {
+    margin-top: 1rem !important;
+    margin-bottom: 0 !important;
+}
+
+.demo-vertical-spacing-lg > * {
+    margin-top: 1.875rem !important;
+    margin-bottom: 0 !important;
+}
+
+.demo-vertical-spacing-xl > * {
+    margin-top: 5rem !important;
+    margin-bottom: 0 !important;
+}
+
+/* Layout wrapper */
+.layout-wrapper {
+    min-height: 100%;
+    display: flex;
+    flex-direction: row-reverse; /* يعكس ترتيب الـ sidebar والصفحة */
+}
+
+/* Sidebar adjustments */
+[dir='rtl'] .layout-menu {
+    float: right;
+    left: auto !important;
+    right: 0;
+}
+
+[dir='rtl'] .layout-menu .menu-inner {
+    text-align: right;
+}
+
+/* Page adjustments */
+[dir='rtl'] .layout-page {
+    margin: 0; /* إزالة أي مارجن */
+    padding-right: 200px !important; /* مساحة للـ sidebar */
+    width: 100% !important;
+    box-sizing: border-box;
+}
+
+
+
+
+/* Content wrapper */
+.content-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Navbar adjustments */
+.layout-navbar-fixed .layout-wrapper:not(.layout-without-menu) .layout-page {
+    padding-top: 64px !important;
+    
+}
+.content-wrapper{
+  overflow-x: hidden !important;
+}
+
+.content-wrapper .navbar {
+    z-index: auto;
+}
+.layout-wrapper{
+  overflow-x: hidden !important;
+}
+
+/* Buttons & dropdowns on small screens */
+@media (max-width: 576px) {
+    #dropdown-variation-demo .btn-group .text-truncate {
+        width: 231px;
+        position: relative;
+    }
+    #dropdown-variation-demo .btn-group .text-truncate::after {
+        right: auto;
+        left: 0.65rem; /* عكس العنصر */
+    }
+}
+
+/* Tables adjustments */
+[dir='rtl'] .content-wrapper table {
+    width: 100% !important;
+    text-align: right;
+}
+
+/* Layout demo wrapper */
+.layout-demo-wrapper {
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Full height */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+/* Navbar fixes */
+.layout-navbar-fixed .layout-wrapper:not(.layout-without-menu) .layout-page {
+    padding-top: 64px !important; /* نفس ارتفاع الـ navbar */
+}
+
+[dir='rtl'] .navbar {
+    flex-direction: row-reverse; /* يعكس العناصر داخل navbar */
+    text-align: right;
+}
+
+.content-wrapper .navbar {
+    z-index: 1000; /* يظل فوق باقي العناصر */
+}
+
+
+[dir='rtl'] .layout-wrapper {
+    flex-direction: row-reverse; /* يعكس ترتيب sidebar والمحتوى */
+}
+
+[dir='rtl'] .layout-menu {
+    float: right;
+    left: auto !important;
+    right: 0;
+}
+
+[dir='rtl'] .layout-menu .menu-inner {
+    text-align: right;
+}
+
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+.layout-wrapper {
+    min-height: 100%;
+    display: flex;
+    width: 110% !important;
+    margin-right: 100px !important;
+    margin-left: 0 !important;
+    flex-direction: row-reverse; 
+}
+
+.layout-page {
+    flex: 1;
+    justify-content: end;
+    padding-right: 1rem;
+}
+@media (min-width: 1200px) {
+  .layout-page {
+    padding-left: 18rem !important;
+  }
+}
+
+
+
+
+.content-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
